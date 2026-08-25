@@ -1213,10 +1213,10 @@
     }, 15000);
 
     // =============================================================
-    // ===== REAL API INTEGRATION =====
+    // ===== FREE API INTEGRATION (NO PAYMENT, NO API KEY) =====
+    // Uses jinix6/free-ff-api - Open source community API
     // =============================================================
-    // Uses free-ff-api to fetch real account details
-    const API_URL = 'https://free-ff-api-src-5plp.onrender.com/api/v1/account';
+    const API_URL = 'https://free-ff-api-src-5plp.onrender.com/api/v1/playerstats';
 
     // ===== MAIN LOGIC =====
     const uidInput = document.getElementById('uidInput');
@@ -1240,25 +1240,29 @@
     const totalSteps = document.getElementById('totalSteps');
     const logOutput = document.getElementById('logOutput');
 
-    // Account info elements
     const accName = document.getElementById('accName');
     const accLevel = document.getElementById('accLevel');
     const accRegion = document.getElementById('accRegion');
     const accountInfo = document.getElementById('accountInfo');
 
-    // ===== FETCH REAL PLAYER DATA =====
+    // ===== FETCH REAL PLAYER DATA (FREE, NO KEY) =====
     async function fetchPlayerData(uid) {
         try {
-            // Change 'IND' to your region: BR, SG, ID, US, PK, etc.
-            const region = 'IND';
+            // Change region code: IND, BR, SG, ID, US, PK, BD, TH, VN, TW, etc.
+            const region = 'IND'; // <-- CHANGE THIS to user's region
             const url = `${API_URL}?region=${region}&uid=${uid}`;
+            
+            console.log('Fetching:', url);
             const response = await fetch(url);
             
             if (!response.ok) {
+                const errorText = await response.text();
+                console.error('API Error:', response.status, errorText);
                 throw new Error('Invalid UID or region');
             }
             
             const data = await response.json();
+            console.log('Player Data:', data);
             return data;
         } catch (error) {
             console.error('Error fetching player data:', error.message);
@@ -1288,14 +1292,13 @@
             
             const data = await fetchPlayerData(uid);
             
+            // Check if we got valid data
             if (data && data.nickname) {
-                // Display real data
                 accName.textContent = data.nickname || 'Unknown';
                 accName.style.color = '#5cdb9e';
                 accLevel.textContent = 'Level ' + (data.level || '?');
                 accRegion.textContent = data.region || 'Unknown';
                 
-                // Store data for later
                 window.realPlayerData = data;
                 recoverBtn.disabled = false;
             } else {
