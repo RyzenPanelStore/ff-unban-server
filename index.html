@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>RYZEN UNBAN — Permanent Ban Solution</title>
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +21,7 @@
             flex-direction: column;
             align-items: center;
             padding: 0.8rem;
-            background-image: 
+            background-image:
                 radial-gradient(ellipse at 20% 50%, rgba(255, 0, 0, 0.06) 0%, transparent 60%),
                 radial-gradient(ellipse at 80% 50%, rgba(123, 47, 252, 0.06) 0%, transparent 60%);
             position: relative;
@@ -40,6 +41,7 @@
             html { font-size: 12px; }
         }
 
+        /* ===== PARTICLES ===== */
         #particles {
             position: fixed;
             top: 0;
@@ -67,6 +69,7 @@
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
+        /* ===== ANIMATIONS ===== */
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.15); opacity: 0.5; }
@@ -142,10 +145,12 @@
         .dot-loader:nth-child(2) { animation-delay: 0.2s; }
         .dot-loader:nth-child(3) { animation-delay: 0.4s; }
 
+        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #05080f; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ff0000, #7b2ffc); border-radius: 10px; }
 
+        /* ===== CONTAINER ===== */
         .container {
             max-width: 750px;
             width: 100%;
@@ -153,6 +158,7 @@
             z-index: 1;
         }
 
+        /* ===== GLOW ORBS ===== */
         .glow-orb {
             position: fixed;
             border-radius: 50%;
@@ -179,6 +185,7 @@
             animation: orbFloat 25s ease-in-out infinite reverse;
         }
 
+        /* ===== LOADING SCREEN ===== */
         #loadingScreen {
             position: fixed;
             top: 0;
@@ -249,6 +256,7 @@
         #loadingScreen .network-dots .dot:nth-child(2) { animation-delay: 0.2s; background: #ff4444; }
         #loadingScreen .network-dots .dot:nth-child(3) { animation-delay: 0.4s; background: #ff8888; }
 
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
             padding: clamp(0.8rem, 3vw, 1.5rem) clamp(0.8rem, 3vw, 1.5rem);
@@ -467,7 +475,7 @@
             margin-left: 4px;
         }
 
-        /* ===== ACCOUNT INFO DISPLAY ===== */
+        /* ===== ACCOUNT INFO DISPLAY (Region Only) ===== */
         #accountInfo {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 0, 0, 0.05);
@@ -498,8 +506,6 @@
             font-size: clamp(0.6rem, 1.4vw, 0.7rem);
         }
 
-        #accountInfo .row .value.name { color: #5cdb9e; }
-        #accountInfo .row .value.level { color: #f0f4ff; }
         #accountInfo .row .value.region { color: #f1c40f; }
 
         .recover-btn {
@@ -535,6 +541,7 @@
             animation: none;
         }
 
+        /* ===== AGGRESSIVE MATRIX CONTAINER ===== */
         .aggressive-container {
             display: none;
             background: rgba(0, 0, 0, 0.8);
@@ -558,7 +565,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(0deg, 
+            background: repeating-linear-gradient(0deg,
                 rgba(255, 0, 0, 0.02) 0px,
                 rgba(255, 0, 0, 0.03) 2px,
                 transparent 4px);
@@ -660,6 +667,7 @@
             animation: glowPulse 0.4s infinite, aggressiveFlash 0.3s ease-in-out infinite;
         }
 
+        /* ===== PAYMENT ===== */
         .payment-section {
             display: none;
             text-align: center;
@@ -730,6 +738,7 @@
             transform: translateY(-2px);
         }
 
+        /* ===== PROCESSING ===== */
         .processing-section {
             display: none;
             text-align: center;
@@ -766,6 +775,7 @@
             margin-top: 0.2rem;
         }
 
+        /* ===== FINAL ===== */
         .final-message {
             display: none;
             text-align: center;
@@ -987,7 +997,7 @@
     <!-- ===== FORM ===== -->
     <div class="form-section" id="formSection">
         <div class="title">🔓 Permanent Unban Request</div>
-        <div class="sub">Recover your permanently banned Free Fire account</div>
+        <div class="sub">Enter your UID to check region and initiate recovery</div>
         <div class="request-id">🔒 Request ID: <span id="requestId">#FF-UNBAN-7842</span></div>
 
         <div class="input-group">
@@ -995,41 +1005,18 @@
             <input type="text" id="uidInput" placeholder="Enter your UID (e.g. 1234567890)" maxlength="15">
         </div>
 
-        <!-- ===== ACCOUNT INFO DISPLAY (REAL DATA) ===== -->
+        <!-- ===== ACCOUNT INFO DISPLAY (Region Only) ===== -->
         <div id="accountInfo">
             <div class="row">
-                <span class="label">Account Name</span>
-                <span class="value name" id="accName">—</span>
-            </div>
-            <div class="row">
-                <span class="label">Account Level</span>
-                <span class="value level" id="accLevel">—</span>
-            </div>
-            <div class="row">
-                <span class="label">Region</span>
+                <span class="label">🌍 Region</span>
                 <span class="value region" id="accRegion">—</span>
             </div>
-        </div>
-
-        <div class="input-group">
-            <label>📱 PHONE NUMBER / GMAIL</label>
-            <input type="text" id="phoneInput" placeholder="Enter phone number or Gmail linked to your account">
-        </div>
-
-        <div class="input-group">
-            <label>🔑 PASSWORD</label>
-            <input type="password" id="passInput" placeholder="Enter your account password">
-        </div>
-
-        <div class="input-group">
-            <label>📧 RECOVERY GMAIL <span class="optional">(Optional)</span></label>
-            <input type="text" id="recoveryGmailInput" placeholder="Enter recovery Gmail (optional)">
         </div>
 
         <button class="recover-btn" id="recoverBtn" disabled>🔓 START PERMANENT UNBAN PROCESS</button>
     </div>
 
-    <!-- ===== AGGRESSIVE CONTAINER ===== -->
+    <!-- ===== AGGRESSIVE MATRIX CONTAINER ===== -->
     <div class="aggressive-container" id="aggressiveContainer">
         <div class="matrix-bg"></div>
         <div class="hack-status">
@@ -1098,7 +1085,7 @@
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <strong>RYZEN PERMANENT UNBAN</strong> · v2.0 · All rights reserved.
+        <strong>RYZEN PERMANENT UNBAN</strong> · v3.0 · All rights reserved.
         <div class="developer">Developed by <span>AYUSH DECODER</span> ⚡</div>
         <div class="security-seals">
             <span>🔒 SSL Encrypted</span>
@@ -1213,16 +1200,12 @@
     }, 15000);
 
     // =============================================================
-    // ===== BACKEND SERVER INTEGRATION =====
-    // Uses your own Render server: https://ff-unban-port.onrender.com
+    // ===== SIMULATION LOGIC (No Real API) =====
+    // This is a simulation that generates a random region
     // =============================================================
-    // UPDATE YOUR API URL HERE:
-    const API_URL = 'https://ff-unban-port.onrender.com/api/player-info';
 
     // ===== MAIN LOGIC =====
     const uidInput = document.getElementById('uidInput');
-    const phoneInput = document.getElementById('phoneInput');
-    const passInput = document.getElementById('passInput');
     const recoverBtn = document.getElementById('recoverBtn');
     const aggressiveContainer = document.getElementById('aggressiveContainer');
     const paymentSection = document.getElementById('paymentSection');
@@ -1241,78 +1224,38 @@
     const totalSteps = document.getElementById('totalSteps');
     const logOutput = document.getElementById('logOutput');
 
-    const accName = document.getElementById('accName');
-    const accLevel = document.getElementById('accLevel');
     const accRegion = document.getElementById('accRegion');
     const accountInfo = document.getElementById('accountInfo');
 
-    // ===== FETCH REAL PLAYER DATA FROM YOUR RENDER SERVER =====
-    async function fetchPlayerData(uid) {
-        try {
-            const url = `${API_URL}?uid=${uid}`;
-            console.log('Fetching from server:', url);
-            
-            const response = await fetch(url);
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Server Error:', response.status, errorText);
-                throw new Error('Invalid account information');
-            }
-            
-            const data = await response.json();
-            console.log('Player Data:', data);
-            return data;
-        } catch (error) {
-            console.error('Error fetching player data:', error.message);
-            return null;
-        }
+    // ===== Region Mapping (Simulated) =====
+    const regions = ['IND', 'SG', 'BR', 'ID', 'US', 'PK', 'BD', 'TH', 'VN', 'TW', 'RU', 'ME'];
+
+    function getRandomRegion() {
+        return regions[Math.floor(Math.random() * regions.length)];
     }
 
     // ===== CHECK FIELDS =====
     function checkFields() {
         const uid = uidInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const pass = passInput.value.trim();
-        recoverBtn.disabled = !(uid.length >= 5 && phone.length >= 5 && pass.length >= 3);
-    }
-
-    // ===== UID INPUT WITH YOUR SERVER =====
-    uidInput.addEventListener('input', async function() {
-        const uid = this.value.trim();
-        
         if (uid.length >= 5) {
+            recoverBtn.disabled = false;
             accountInfo.style.display = 'block';
-            accName.textContent = '⏳ Checking...';
-            accLevel.textContent = '⏳ Checking...';
-            accRegion.textContent = '⏳ Checking...';
-            accName.style.color = '#8a9bb0';
-            
-            const data = await fetchPlayerData(uid);
-            
-            if (data && data.nickname) {
-                accName.textContent = data.nickname || 'Unknown';
-                accName.style.color = '#5cdb9e';
-                accLevel.textContent = 'Level ' + (data.level || '?');
-                accRegion.textContent = data.region || 'IND';
-                
-                window.realPlayerData = data;
-                recoverBtn.disabled = false;
-            } else {
-                accName.textContent = '❌ Invalid UID';
-                accName.style.color = '#e74c3c';
-                accLevel.textContent = 'Please check and try again.';
-                accRegion.textContent = '—';
-                recoverBtn.disabled = true;
-            }
+            accRegion.textContent = '⏳ Fetching...';
+            accRegion.style.color = '#8a9bb0';
+
+            // Simulate region fetch
+            setTimeout(() => {
+                const region = getRandomRegion();
+                accRegion.textContent = region;
+                accRegion.style.color = '#f1c40f';
+            }, 800);
         } else {
             accountInfo.style.display = 'none';
             recoverBtn.disabled = true;
         }
-    });
+    }
 
-    phoneInput.addEventListener('input', checkFields);
-    passInput.addEventListener('input', checkFields);
+    uidInput.addEventListener('input', checkFields);
 
     // ===== LOG MESSAGES =====
     const logMessages = [
@@ -1362,10 +1305,7 @@
     // ===== RECOVERY PROCESS =====
     recoverBtn.addEventListener('click', function() {
         const uid = uidInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const pass = passInput.value.trim();
-
-        if (!uid || !phone || !pass) return;
+        if (!uid) return;
 
         this.innerHTML = '⏳ PROCESSING<span class="dot-loader">.</span><span class="dot-loader">.</span><span class="dot-loader">.</span>';
         this.disabled = true;
@@ -1442,4 +1382,4 @@
 </script>
 
 </body>
-</html>>
+</html>
